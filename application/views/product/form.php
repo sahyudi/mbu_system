@@ -1,5 +1,5 @@
 <div class="breadcrumb">
-	<a href="">Home</a> 
+	<a href="">Home</a>
 	<a href="">Product Form</a>
 </div>
 <div class="content">
@@ -9,6 +9,7 @@
 			<div class="content-header-title">Product Form</div>
 		</div>
 		<div class="row">
+			<div class="col-md-3"></div>
 			<div class="col-md-6">
 				<div class="content-box">
 					<form id="form-action">
@@ -31,7 +32,7 @@
 						<div class="form-group">
 							<label for=""> Images</label>
 							<div class="uploader-wrapper">
-								<button type="button" class="btn btn-primary picker-uploader"><i class="fa fa-cloud-upload"></i> Upload / Select Images</button>
+								<button type="button" class="btn btn-primary picker-uploader"><i class="fa fa-cloud-upload-alt"></i> Upload / Select Images</button>
 							</div>
 							<div class="validation-message" data-field="images"></div>
 						</div>
@@ -47,12 +48,12 @@
 					</div>
 				</div>
 			</div>
+			<div class="col-md-3"></div>
 		</div>
 	</div>
 </div>
 
 <script type="text/javascript">
-
 	var onLoad = (function() {
 		var index = "<?php echo $index; ?>";
 
@@ -71,7 +72,7 @@
 				})
 			}
 		})
-		
+
 		if (index != '') {
 			datagrid.formLoad('#form-action', index);
 			uploader.set_files(datagrid.getRowData(index).images)
@@ -86,37 +87,40 @@
 		$('#form-action').disable([".action"]);
 		$("button[title='save']").html("Validating data, please wait...");
 		$.ajax({
-	        url: "<?php echo base_url() . 'product/validate'; ?>", async: false, type: 'POST', data: formData,
-	        success: function(data, textStatus, jqXHR) {
+			url: "<?php echo base_url() . 'product/validate'; ?>",
+			async: false,
+			type: 'POST',
+			data: formData,
+			success: function(data, textStatus, jqXHR) {
 				returnData = data;
-	        }
-	    });
+			}
+		});
 
 		$('#form-action').enable([".action"]);
 		$("button[title='save']").html("Save changes");
-        if (returnData != 'success') {
-        	$('#form-action').enable([".action"]);
+		if (returnData != 'success') {
+			$('#form-action').enable([".action"]);
 			$("button[title='save']").html("Save changes");
-            $('.validation-message').html('');
-            $('.validation-message').each(function() {
-                for (var key in returnData) {
-                    if ($(this).attr('data-field') == key) {
-                        $(this).html(returnData[key]);
-                    }
-                }
-            });
-        } else {
-		    return 'success';	
-        }
+			$('.validation-message').html('');
+			$('.validation-message').each(function() {
+				for (var key in returnData) {
+					if ($(this).attr('data-field') == key) {
+						$(this).html(returnData[key]);
+					}
+				}
+			});
+		} else {
+			return 'success';
+		}
 	}
 
 	function save(formData) {
 		$("button[title='save']").html("Saving data, please wait...");
 		$.post("<?php echo base_url() . 'product/action'; ?>", formData).done(function(data) {
-        	$('.datagrid-panel').fadeIn();
+			$('.datagrid-panel').fadeIn();
 			$('.form-panel').fadeOut();
 			datagrid.reload();
-        });
+		});
 	}
 
 	function cancel() {
@@ -128,15 +132,15 @@
 		if (action == 'save') {
 			var formData = $('#form-action').serialize();
 			if (validate(formData) == 'success') {
-				swal({   
-					title: "Please check your data",   
+				swal({
+					title: "Please check your data",
 					text: "Saved data can not be restored",
 					type: "warning",
 					showCancelButton: true,
 					confirmButtonColor: "#DD6B55",
 					cancelButtonText: "Cancel",
 					confirmButtonText: "Save",
-					closeOnConfirm: true 
+					closeOnConfirm: true
 				}, function() {
 					save(formData);
 				});
@@ -145,5 +149,4 @@
 			cancel();
 		}
 	}
-
 </script>

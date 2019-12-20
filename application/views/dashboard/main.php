@@ -58,7 +58,7 @@
 					<i class="fa fa-tasks"></i>
 					<div class="clear">
 						<div class="card-title">
-							<span class="timer" data-from="0" data-to="24">24</span>
+							<span class="timer" data-from="0" data-to="6">6</span>
 						</div>
 						<div class="card-subtitle">PROJECT PROGRESS</div>
 					</div>
@@ -77,9 +77,9 @@
 					<i class="fa fa-users"></i>
 					<div class="clear">
 						<div class="card-title">
-							<span class="timer" data-from="0" data-to="20">20</span>
+							<span class="timer" data-from="0" data-to="5">5</span>
 						</div>
-						<div class="card-subtitle">EMPLOYEE</div>
+						<div class="card-subtitle">Users</div>
 					</div>
 				</div>
 				<div class="card-menu">

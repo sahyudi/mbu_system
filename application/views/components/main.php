@@ -315,7 +315,7 @@
 				<?php } ?>
 			</ul>
 		</div>
-		<div class="main-menu-title">HTML Template</div>
+		<!-- <div class="main-menu-title">HTML Template</div> -->
 		<div class="main-menu">
 			<ul>
 				<?php foreach ($list_menu as $key => $menu) { ?>

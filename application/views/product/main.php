@@ -1,7 +1,7 @@
 <!-- Table -->
 <section class="datagrid-panel">
 	<div class="breadcrumb">
-		<a href="">Home</a> 
+		<a href="">Home</a>
 		<a href="">Products</a>
 	</div>
 	<div class="content">
@@ -16,7 +16,7 @@
 						<div class="content-box-header">
 							<div class="row">
 								<div class="col-md-6">
-									<button class="btn btn-primary" onclick="main_routes('create', '')"><i class="fa fa-pencil"></i> Add New Product</button>
+									<button class="btn btn-primary" onclick="main_routes('create', '')"><i class="fa fa-pencil-alt"></i> Add New Product</button>
 								</div>
 								<div class="col-md-6 form-inline justify-content-end">
 									<select class="form-control mb-1 mr-sm-1 mb-sm-0" id="search-option"></select>
@@ -26,7 +26,7 @@
 						</div>
 						<div class="table-responsive">
 							<table class="table table-striped table-bordered" id="datagrid">
-								
+
 							</table>
 						</div>
 						<div class="content-box-footer">
@@ -52,57 +52,88 @@
 
 <script type="text/javascript">
 	var datagrid = $("#datagrid").datagrid({
-		url						: "<?php echo base_url() . 'product/data'; ?>",
-		primaryField			: 'id', 
-		rowNumber				: true,
-		searchInputElement 		: '#search', 
-		searchFieldElement 		: '#search-option', 
-		pagingElement 			: '#paging', 
-		optionPagingElement 	: '#option', 
-		pageInfoElement 		: '#info',
-		columns					: [
-	        {field: 'product_name', title: 'Product Name', editable: true, sortable: true, width: 450, align: 'left', search: true},
-	       	{field: 'price_formatted', title: 'Price', sortable: false, width: 100, align: 'center', search: false, 
-	       		rowStyler: function(rowData, rowIndex) {
-	       			return '<span class="badge badge-yellow">$' + rowData.price + '</span>';
-	       		}
-	       	},
-	       	{field: 'stock', title: 'Stock', editable: true, sortable: true, width: 100, align: 'center', search: true},
-	       	{field: 'menu', title: 'Menu', sortable: false, width: 200, align: 'center', search: false, 
-	       		rowStyler: function(rowData, rowIndex) {
-	       			return menu(rowData, rowIndex);
-	       		}
-	       	}
-	    ]
+		url: "<?php echo base_url() . 'product/data'; ?>",
+		primaryField: 'id',
+		rowNumber: true,
+		searchInputElement: '#search',
+		searchFieldElement: '#search-option',
+		pagingElement: '#paging',
+		optionPagingElement: '#option',
+		pageInfoElement: '#info',
+		columns: [{
+				field: 'product_name',
+				title: 'Product Name',
+				editable: true,
+				sortable: true,
+				width: 450,
+				align: 'left',
+				search: true
+			},
+			{
+				field: 'price_formatted',
+				title: 'Price',
+				sortable: false,
+				width: 100,
+				align: 'center',
+				search: false,
+				rowStyler: function(rowData, rowIndex) {
+					return '<span class="badge badge-yellow">Rp. ' + rowData.price + '</span>';
+				}
+			},
+			{
+				field: 'stock',
+				title: 'Stock',
+				editable: true,
+				sortable: true,
+				width: 100,
+				align: 'center',
+				search: true
+			},
+			{
+				field: 'menu',
+				title: 'Menu',
+				sortable: false,
+				width: 200,
+				align: 'center',
+				search: false,
+				rowStyler: function(rowData, rowIndex) {
+					return menu(rowData, rowIndex);
+				}
+			}
+		]
 	});
 
 	datagrid.run();
 
 	function menu(rowData, rowIndex) {
-		var menu = '<a href="javascript:;" onclick="main_routes(\'update\', ' + rowIndex + ')"><i class="fa fa-pencil"></i> Edit</a> ' +
-		'<a href="javascript:;" onclick="delete_action(' + rowIndex + ')"><i class="fa fa-trash-o"></i> Delete</a>'
+		var menu = '<a href="javascript:;" onclick="main_routes(\'update\', ' + rowIndex + ')"><i class="fa fa-pencil-alt"></i> Edit</a> ' +
+			'<a href="javascript:;" onclick="delete_action(' + rowIndex + ')"><i class="fa fa-trash-alt"></i> Delete</a>'
 		return menu;
 	}
 
 	function create_update_form(rowIndex) {
-		$.post("<?php echo base_url() . 'product/form'; ?>", {index : rowIndex}).done(function(data) {
+		$.post("<?php echo base_url() . 'product/form'; ?>", {
+			index: rowIndex
+		}).done(function(data) {
 			$('.form-panel').html(data);
 		});
 	}
 
 	function delete_action(rowIndex) {
-		swal({   
-			title: "Are you sure want to delete this data?",   
+		swal({
+			title: "Are you sure want to delete this data?",
 			text: "Deleted data can not be restored!",
 			type: "warning",
 			showCancelButton: true,
 			confirmButtonColor: "#DD6B55",
 			cancelButtonText: "Cancel",
 			confirmButtonText: "Hapus",
-			closeOnConfirm: true 
+			closeOnConfirm: true
 		}, function() {
 			var row = datagrid.getRowData(rowIndex);
-			$.post("<?php echo base_url() . 'product/delete'; ?>", {id : row.id}).done(function(data) {
+			$.post("<?php echo base_url() . 'product/delete'; ?>", {
+				id: row.id
+			}).done(function(data) {
 				datagrid.reload();
 			});
 		});
@@ -118,5 +149,4 @@
 			create_update_form(rowIndex);
 		}
 	}
-
 </script>

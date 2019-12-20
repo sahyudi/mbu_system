@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50626
 File Encoding         : 65001
 
-Date: 2019-12-20 22:52:55
+Date: 2019-12-21 00:53:30
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -58,8 +58,7 @@ INSERT INTO menus VALUES ('6', '5', '0', 'All Project', 'project', 'i i-idot');
 INSERT INTO menus VALUES ('7', '5', '0', 'Material', 'project/material', 'i i-idot');
 INSERT INTO menus VALUES ('8', '5', '0', 'Mesin', 'project/mesin', 'i i-idot');
 INSERT INTO menus VALUES ('9', '5', '0', 'Ruangan', 'project/ruangan', 'i i-idot');
-INSERT INTO menus VALUES ('10', '0', '1', 'Vendor', '', 'fa fa-parachute-box');
-INSERT INTO menus VALUES ('11', '10', '0', 'List', 'vendor', 'i i-idot');
+INSERT INTO menus VALUES ('10', '0', '0', 'Vendor', 'vendor', 'fa fa-parachute-box');
 INSERT INTO menus VALUES ('12', '0', '2', 'Material', '', 'fa fa-clipboard-list');
 INSERT INTO menus VALUES ('13', '12', '0', 'Stock', 'material', 'i i-idot');
 INSERT INTO menus VALUES ('59', '0', '0', 'Products', 'product', 'fa fa-database');
@@ -89,7 +88,7 @@ INSERT INTO menus VALUES ('104', '97', '0', 'Chat', 'template/chat', 'i i-dot');
 INSERT INTO menus VALUES ('105', '97', '0', 'Error 404', 'template/error_404', 'i i-dot');
 INSERT INTO menus VALUES ('106', '97', '0', 'Error 500', 'template/error_500', 'i i-dot');
 INSERT INTO menus VALUES ('107', '97', '0', 'Blank Layout', 'template/blank_layout', 'i i-dot');
-INSERT INTO menus VALUES ('108', '0', '0', 'Calendar', 'template/calendar', 'fa fa-map-o');
+INSERT INTO menus VALUES ('108', '0', '0', 'Calendar', 'template/calendar', 'fa fa-calendar-alt');
 INSERT INTO menus VALUES ('109', '0', '11', 'Icons', '', 'fa fa-paper-plane');
 INSERT INTO menus VALUES ('110', '109', '0', 'Font Awesome', 'template/font_awesome', 'i i-dot');
 INSERT INTO menus VALUES ('111', '109', '0', 'Batch', 'template/batch', 'i i-dot');
@@ -102,7 +101,7 @@ INSERT INTO menus VALUES ('117', '109', '0', 'Simple Line', 'template/simple_lin
 INSERT INTO menus VALUES ('118', '109', '0', 'Themify', 'template/themify', 'i i-dot');
 INSERT INTO menus VALUES ('119', '109', '0', 'Typeicon', 'template/typeicon', 'i i-dot');
 INSERT INTO menus VALUES ('120', '109', '0', 'Weather Icon', 'template/weather_icon', 'i i-dot');
-INSERT INTO menus VALUES ('121', '12', '0', 'Pembelian', 'material/pembelian', 'i i-idot');
+INSERT INTO menus VALUES ('121', '12', '0', 'Pengadaan', 'pengadaan', 'i i-idot');
 
 -- ----------------------------
 -- Table structure for `migrations`
@@ -148,65 +147,31 @@ CREATE TABLE `privileges` (
   KEY `menu_id` (`menu_id`),
   CONSTRAINT `privileges_ibfk_1` FOREIGN KEY (`group_id`) REFERENCES `groups` (`id`) ON UPDATE CASCADE,
   CONSTRAINT `privileges_ibfk_2` FOREIGN KEY (`menu_id`) REFERENCES `menus` (`id`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2631 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2978 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of privileges
 -- ----------------------------
-INSERT INTO privileges VALUES ('2577', '1', '1');
-INSERT INTO privileges VALUES ('2578', '1', '2');
-INSERT INTO privileges VALUES ('2579', '1', '3');
-INSERT INTO privileges VALUES ('2580', '1', '4');
-INSERT INTO privileges VALUES ('2581', '1', '5');
-INSERT INTO privileges VALUES ('2582', '1', '6');
-INSERT INTO privileges VALUES ('2583', '1', '7');
-INSERT INTO privileges VALUES ('2584', '1', '8');
-INSERT INTO privileges VALUES ('2585', '1', '9');
-INSERT INTO privileges VALUES ('2586', '1', '59');
-INSERT INTO privileges VALUES ('2587', '1', '60');
-INSERT INTO privileges VALUES ('2588', '1', '83');
-INSERT INTO privileges VALUES ('2589', '1', '84');
-INSERT INTO privileges VALUES ('2590', '1', '85');
-INSERT INTO privileges VALUES ('2591', '1', '86');
-INSERT INTO privileges VALUES ('2592', '1', '87');
-INSERT INTO privileges VALUES ('2593', '1', '88');
-INSERT INTO privileges VALUES ('2594', '1', '89');
-INSERT INTO privileges VALUES ('2595', '1', '90');
-INSERT INTO privileges VALUES ('2596', '1', '91');
-INSERT INTO privileges VALUES ('2597', '1', '92');
-INSERT INTO privileges VALUES ('2598', '1', '93');
-INSERT INTO privileges VALUES ('2599', '1', '94');
-INSERT INTO privileges VALUES ('2600', '1', '95');
-INSERT INTO privileges VALUES ('2601', '1', '96');
-INSERT INTO privileges VALUES ('2602', '1', '97');
-INSERT INTO privileges VALUES ('2603', '1', '98');
-INSERT INTO privileges VALUES ('2604', '1', '99');
-INSERT INTO privileges VALUES ('2605', '1', '100');
-INSERT INTO privileges VALUES ('2606', '1', '101');
-INSERT INTO privileges VALUES ('2607', '1', '102');
-INSERT INTO privileges VALUES ('2608', '1', '103');
-INSERT INTO privileges VALUES ('2609', '1', '104');
-INSERT INTO privileges VALUES ('2610', '1', '105');
-INSERT INTO privileges VALUES ('2611', '1', '106');
-INSERT INTO privileges VALUES ('2612', '1', '107');
-INSERT INTO privileges VALUES ('2613', '1', '108');
-INSERT INTO privileges VALUES ('2614', '1', '109');
-INSERT INTO privileges VALUES ('2615', '1', '110');
-INSERT INTO privileges VALUES ('2616', '1', '111');
-INSERT INTO privileges VALUES ('2617', '1', '112');
-INSERT INTO privileges VALUES ('2618', '1', '113');
-INSERT INTO privileges VALUES ('2619', '1', '114');
-INSERT INTO privileges VALUES ('2620', '1', '115');
-INSERT INTO privileges VALUES ('2621', '1', '116');
-INSERT INTO privileges VALUES ('2622', '1', '117');
-INSERT INTO privileges VALUES ('2623', '1', '118');
-INSERT INTO privileges VALUES ('2624', '1', '119');
-INSERT INTO privileges VALUES ('2625', '1', '120');
 INSERT INTO privileges VALUES ('2626', '2', '5');
 INSERT INTO privileges VALUES ('2627', '2', '6');
 INSERT INTO privileges VALUES ('2628', '2', '7');
 INSERT INTO privileges VALUES ('2629', '2', '8');
 INSERT INTO privileges VALUES ('2630', '2', '9');
+INSERT INTO privileges VALUES ('2963', '1', '1');
+INSERT INTO privileges VALUES ('2964', '1', '2');
+INSERT INTO privileges VALUES ('2965', '1', '3');
+INSERT INTO privileges VALUES ('2966', '1', '4');
+INSERT INTO privileges VALUES ('2967', '1', '5');
+INSERT INTO privileges VALUES ('2968', '1', '6');
+INSERT INTO privileges VALUES ('2969', '1', '7');
+INSERT INTO privileges VALUES ('2970', '1', '8');
+INSERT INTO privileges VALUES ('2971', '1', '9');
+INSERT INTO privileges VALUES ('2972', '1', '10');
+INSERT INTO privileges VALUES ('2973', '1', '12');
+INSERT INTO privileges VALUES ('2974', '1', '13');
+INSERT INTO privileges VALUES ('2975', '1', '121');
+INSERT INTO privileges VALUES ('2976', '1', '59');
+INSERT INTO privileges VALUES ('2977', '1', '60');
 
 -- ----------------------------
 -- Table structure for `products`
@@ -243,7 +208,7 @@ INSERT INTO products VALUES ('13', 'Microsoft Lumia 430 Dual SIM', '227', '44', 
 INSERT INTO products VALUES ('14', 'Microsoft Lumia 940 XL', '366', '75', '[{\"file_name\":\"nokia-lumia-930-new.27-05-2017_00-15-27.jpg\",\"file_size\":7518,\"file_type\":\"image/jpeg\",\"file_thumbnail\":\"http://localhost/pongo_web/public/product_images/nokia-lumia-930-new.27-05-2017_00-15-27.jpg\"},{\"file_name\":\"microsoft-lumia-950-1.27-05-2017_00-15-27.jpg\",\"file_size\":7217,\"file_type\":\"image/jpeg\",\"file_thumbnail\":\"http://localhost/pongo_web/public/product_images/microsoft-lumia-950-1.27-05-2017_00-15-27.jpg\"},{\"file_name\":\"microsoft-lumia-540-ds1.27-05-2017_00-15-27.jpg\",\"file_size\":7649,\"file_type\":\"image/jpeg\",\"file_thumbnail\":\"http://localhost/pongo_web/public/product_images/microsoft-lumia-540-ds1.27-05-2017_00-15-27.jpg\"}]', '-', '2017-05-27 00:24:03', '2017-05-27 00:24:03');
 INSERT INTO products VALUES ('15', 'Microsoft Lumia 1030', '329', '57', '[{\"file_name\":\"nokia-lumia-930-new.27-05-2017_00-15-27.jpg\",\"file_size\":7518,\"file_type\":\"image/jpeg\",\"file_thumbnail\":\"http://localhost/pongo_web/public/product_images/nokia-lumia-930-new.27-05-2017_00-15-27.jpg\"},{\"file_name\":\"microsoft-lumia-950-1.27-05-2017_00-15-27.jpg\",\"file_size\":7217,\"file_type\":\"image/jpeg\",\"file_thumbnail\":\"http://localhost/pongo_web/public/product_images/microsoft-lumia-950-1.27-05-2017_00-15-27.jpg\"},{\"file_name\":\"microsoft-lumia-540-ds1.27-05-2017_00-15-27.jpg\",\"file_size\":7649,\"file_type\":\"image/jpeg\",\"file_thumbnail\":\"http://localhost/pongo_web/public/product_images/microsoft-lumia-540-ds1.27-05-2017_00-15-27.jpg\"}]', '-', '2017-05-27 00:24:03', '2017-05-27 00:24:03');
 INSERT INTO products VALUES ('16', 'Microsoft Lumia 535', '202', '85', '[{\"file_name\":\"nokia-lumia-930-new.27-05-2017_00-15-27.jpg\",\"file_size\":7518,\"file_type\":\"image/jpeg\",\"file_thumbnail\":\"http://localhost/pongo_web/public/product_images/nokia-lumia-930-new.27-05-2017_00-15-27.jpg\"},{\"file_name\":\"microsoft-lumia-950-1.27-05-2017_00-15-27.jpg\",\"file_size\":7217,\"file_type\":\"image/jpeg\",\"file_thumbnail\":\"http://localhost/pongo_web/public/product_images/microsoft-lumia-950-1.27-05-2017_00-15-27.jpg\"},{\"file_name\":\"microsoft-lumia-540-ds1.27-05-2017_00-15-27.jpg\",\"file_size\":7649,\"file_type\":\"image/jpeg\",\"file_thumbnail\":\"http://localhost/pongo_web/public/product_images/microsoft-lumia-540-ds1.27-05-2017_00-15-27.jpg\"}]', '-', '2017-05-27 00:24:03', '2017-05-27 00:24:03');
-INSERT INTO products VALUES ('17', 'Microsoft Lumia 540 Dual SIM', '231', '17', '[{\"file_name\":\"nokia-lumia-930-new.27-05-2017_00-15-27.jpg\",\"file_size\":7518,\"file_type\":\"image/jpeg\",\"file_thumbnail\":\"http://localhost/pongo_web/public/product_images/nokia-lumia-930-new.27-05-2017_00-15-27.jpg\"},{\"file_name\":\"microsoft-lumia-950-1.27-05-2017_00-15-27.jpg\",\"file_size\":7217,\"file_type\":\"image/jpeg\",\"file_thumbnail\":\"http://localhost/pongo_web/public/product_images/microsoft-lumia-950-1.27-05-2017_00-15-27.jpg\"},{\"file_name\":\"microsoft-lumia-540-ds1.27-05-2017_00-15-27.jpg\",\"file_size\":7649,\"file_type\":\"image/jpeg\",\"file_thumbnail\":\"http://localhost/pongo_laravel/public/product_images/microsoft-lumia-540-ds1.27-05-2017_00-15-27.jpg\"}]', '-', '2017-05-27 00:24:03', '2017-07-15 13:12:34');
+INSERT INTO products VALUES ('17', 'Microsoft Lumia 540 Dual SIM', '200000', '17', '[{\"file_name\":\"nokia-lumia-930-new.27-05-2017_00-15-27.jpg\",\"file_size\":7518,\"file_type\":\"image/jpeg\",\"file_thumbnail\":\"http://localhost/pongo_web/public/product_images/nokia-lumia-930-new.27-05-2017_00-15-27.jpg\"},{\"file_name\":\"microsoft-lumia-950-1.27-05-2017_00-15-27.jpg\",\"file_size\":7217,\"file_type\":\"image/jpeg\",\"file_thumbnail\":\"http://localhost/pongo_web/public/product_images/microsoft-lumia-950-1.27-05-2017_00-15-27.jpg\"},{\"file_name\":\"microsoft-lumia-540-ds1.27-05-2017_00-15-27.jpg\",\"file_size\":7649,\"file_type\":\"image/jpeg\",\"file_thumbnail\":\"http://localhost/pongo_laravel/public/product_images/microsoft-lumia-540-ds1.27-05-2017_00-15-27.jpg\"}]', '-', '2017-05-27 00:24:03', '2017-07-15 13:12:34');
 
 -- ----------------------------
 -- Table structure for `settings`
