@@ -13,15 +13,11 @@ class Material extends CI_Controller
 
     function index()
     {
-        $data['title'] = 'Stock';
-        $data['user'] = $this->db->get_where('tbl_user', ['username' => $this->session->userdata('username')])->row_array();
-        $data['material'] = $this->material->getMaterial()->result_array();
-
-        $this->load->view('template/header', $data);
-        $this->load->view('template/sidebar', $data);
-        $this->load->view('template/navbar', $data);
-        $this->load->view('material/index', $data);
-        $this->load->view('template/footer');
+        $this->load->model('Project_m', 'project');
+        $this->data['title'] = 'Project';
+        $this->data['project'] = $this->project->getProject()->result_array();
+        $this->data['subview'] = 'material/main';
+        $this->load->view('components/main', $this->data);
     }
 
     function addMaterial()

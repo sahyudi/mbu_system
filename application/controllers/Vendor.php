@@ -23,9 +23,9 @@ class Vendor extends Base_Controller
     public function index()
     {
         $this->load->model('Project_m', 'project');
-        $this->data['title'] = 'Project';
-        $this->data['project'] = $this->project->getProject()->result_array();
-        $this->data['subview'] = 'project/main';
+        $this->data['title'] = 'Vendor';
+        $this->data['vendor'] = $this->db->get('tbl_vendor')->result_array();
+        $this->data['subview'] = 'vendor/main';
         $this->load->view('components/main', $this->data);
     }
 
@@ -39,13 +39,8 @@ class Vendor extends Base_Controller
 
     public function form()
     {
-        // $data['index'] = $this->input->post('index');
-        $this->load->model('Material_m', 'material');
-        $this->load->model('Project_m', 'project');
-        $data['mesin'] = $this->project->getMesin()->result_array();
-        $data['ruangan'] = $this->project->getRuangan()->result_array();
-        $data['material'] = $this->material->getMaterial()->result_array();
-        $this->load->view('project/form', $data);
+        $data['index'] = $this->input->post('index');
+        $this->load->view('vendor/form', $data);
     }
 
     /**

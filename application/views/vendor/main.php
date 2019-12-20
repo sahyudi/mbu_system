@@ -2,13 +2,13 @@
 <section class="datagrid-panel">
     <div class="breadcrumb">
         <a href="">Home</a>
-        <a href="">Project</a>
+        <a href="">Vendor</a>
     </div>
     <div class="content">
         <div class="panel">
             <div class="content-header no-mg-top">
                 <i class="fa fa-newspaper-o"></i>
-                <div class="content-header-title">Project</div>
+                <div class="content-header-title">Vendor</div>
             </div>
             <div class="row">
                 <div class="col-md-12">
@@ -16,7 +16,7 @@
                         <div class="content-box-header">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <button class="btn btn-primary" onclick="main_routes('create', '')"><i class="fa fa-pencil-alt"></i> Add New Project</button>
+                                    <button class="btn btn-primary" onclick="main_routes('create', '')"><i class="fa fa-pencil-alt"></i> Add New Vendor</button>
                                 </div>
                                 <!-- <div class="col-md-6 form-inline justify-content-end">
                                     <select class="form-control mb-1 mr-sm-1 mb-sm-0" id="search-option"></select>
@@ -29,28 +29,25 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">No</th>
-                                        <th scope="col">No Proyek</th>
+                                        <th scope="col">Kode</th>
                                         <th scope="col">Nama</th>
-                                        <th scope="col">Tanggal Mulai</th>
-                                        <th scope="col">Tanggal Selesai</th>
-                                        <th scope="col">Deskripsi</th>
+                                        <th scope="col">No HP</th>
+                                        <th scope="col">Alamat</th>
                                         <th scope="col">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php $no = 1; ?>
-                                    <?php foreach ($project as $pro) { ?>
+                                    <?php foreach ($vendor as $ven) { ?>
                                         <tr>
-                                            <td align="center"><?= $no++ ?></td>
-                                            <td><?= $pro['proyek_no'] ?></td>
-                                            <td><?= $pro['nama'] ?></td>
-                                            <td><?= $pro['tgl_mulai'] ?></td>
-                                            <td><?= $pro['tgl_selesai'] ?></td>
-                                            <td><?= $pro['deskripsi'] ?></td>
+                                            <td class="text-center"><?= $no++ ?></td>
+                                            <td><?= $ven['kode'] ?></td>
+                                            <td><?= $ven['nama'] ?></td>
+                                            <td><?= $ven['no_hp'] ?></td>
+                                            <td><?= $ven['alamat'] ?></td>
                                             <td>
-                                                <a href="<?= base_url('project/detailProject/') . $pro['id'] ?>" class=""><i class="fa fa-arrows-alt"></i> detail</a>
-                                                <a href="#" data-id="<?= $pro['id']; ?>" data-target="#edit-proyek" data-toggle="modal" class="btn-edit"><i class="fa fa-pencil-alt"></i> Edit</a>
-                                                <a href="javascript:;" onclick="delete_action(<?= $pro['id'] ?>)" class=""><i class="fa fa-trash-alt"></i> delete</a>
+                                                <a href="#" class="btn-edit" data-toggle="modal" data-target="#modal-vendor" data-id="<?= $ven['id'] ?>"><i class="fa fa-pencil-alt"></i> Edit</a>
+                                                <a href="<?= base_url('vendor/deleteVendor/') . $ven['id'] ?>" onclick="return deleteConfirm()"><i class="fa fa-trash-alt"></i> Delete</a>
                                             </td>
                                         </tr>
                                     <?php } ?>
@@ -140,7 +137,7 @@
     }
 
     function create_update_form(rowIndex) {
-        $.post("<?php echo base_url() . 'project/form'; ?>", {
+        $.post("<?php echo base_url() . 'vendor/form'; ?>", {
             index: rowIndex
         }).done(function(data) {
             $('.form-panel').html(data);
