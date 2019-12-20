@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50626
 File Encoding         : 65001
 
-Date: 2019-12-20 07:26:51
+Date: 2019-12-20 22:52:55
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -44,7 +44,7 @@ CREATE TABLE `menus` (
   `link` varchar(150) NOT NULL,
   `icon` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=121 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=122 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of menus
@@ -53,6 +53,15 @@ INSERT INTO menus VALUES ('1', '0', '3', 'Settings', '', 'fa fa-cog');
 INSERT INTO menus VALUES ('2', '1', '0', 'Users', 'user', 'i i-dot');
 INSERT INTO menus VALUES ('3', '1', '0', 'Groups', 'group', 'i i-dot');
 INSERT INTO menus VALUES ('4', '1', '0', 'Privileges', 'privilege', 'i i-dot');
+INSERT INTO menus VALUES ('5', '0', '4', 'Project', '', 'fa fa-tasks');
+INSERT INTO menus VALUES ('6', '5', '0', 'All Project', 'project', 'i i-idot');
+INSERT INTO menus VALUES ('7', '5', '0', 'Material', 'project/material', 'i i-idot');
+INSERT INTO menus VALUES ('8', '5', '0', 'Mesin', 'project/mesin', 'i i-idot');
+INSERT INTO menus VALUES ('9', '5', '0', 'Ruangan', 'project/ruangan', 'i i-idot');
+INSERT INTO menus VALUES ('10', '0', '1', 'Vendor', '', 'fa fa-parachute-box');
+INSERT INTO menus VALUES ('11', '10', '0', 'List', 'vendor', 'i i-idot');
+INSERT INTO menus VALUES ('12', '0', '2', 'Material', '', 'fa fa-clipboard-list');
+INSERT INTO menus VALUES ('13', '12', '0', 'Stock', 'material', 'i i-idot');
 INSERT INTO menus VALUES ('59', '0', '0', 'Products', 'product', 'fa fa-database');
 INSERT INTO menus VALUES ('60', '0', '0', 'Transactions', 'transaction', 'fa fa-dollar');
 INSERT INTO menus VALUES ('83', '0', '2', 'Menu Styles', '', 'fa fa-random');
@@ -93,6 +102,7 @@ INSERT INTO menus VALUES ('117', '109', '0', 'Simple Line', 'template/simple_lin
 INSERT INTO menus VALUES ('118', '109', '0', 'Themify', 'template/themify', 'i i-dot');
 INSERT INTO menus VALUES ('119', '109', '0', 'Typeicon', 'template/typeicon', 'i i-dot');
 INSERT INTO menus VALUES ('120', '109', '0', 'Weather Icon', 'template/weather_icon', 'i i-dot');
+INSERT INTO menus VALUES ('121', '12', '0', 'Pembelian', 'material/pembelian', 'i i-idot');
 
 -- ----------------------------
 -- Table structure for `migrations`
@@ -138,55 +148,65 @@ CREATE TABLE `privileges` (
   KEY `menu_id` (`menu_id`),
   CONSTRAINT `privileges_ibfk_1` FOREIGN KEY (`group_id`) REFERENCES `groups` (`id`) ON UPDATE CASCADE,
   CONSTRAINT `privileges_ibfk_2` FOREIGN KEY (`menu_id`) REFERENCES `menus` (`id`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2328 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2631 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of privileges
 -- ----------------------------
-INSERT INTO privileges VALUES ('2284', '1', '1');
-INSERT INTO privileges VALUES ('2285', '1', '2');
-INSERT INTO privileges VALUES ('2286', '1', '3');
-INSERT INTO privileges VALUES ('2287', '1', '4');
-INSERT INTO privileges VALUES ('2288', '1', '59');
-INSERT INTO privileges VALUES ('2289', '1', '60');
-INSERT INTO privileges VALUES ('2290', '1', '83');
-INSERT INTO privileges VALUES ('2291', '1', '84');
-INSERT INTO privileges VALUES ('2292', '1', '85');
-INSERT INTO privileges VALUES ('2293', '1', '86');
-INSERT INTO privileges VALUES ('2294', '1', '87');
-INSERT INTO privileges VALUES ('2295', '1', '88');
-INSERT INTO privileges VALUES ('2296', '1', '89');
-INSERT INTO privileges VALUES ('2297', '1', '90');
-INSERT INTO privileges VALUES ('2298', '1', '91');
-INSERT INTO privileges VALUES ('2299', '1', '92');
-INSERT INTO privileges VALUES ('2300', '1', '93');
-INSERT INTO privileges VALUES ('2301', '1', '94');
-INSERT INTO privileges VALUES ('2302', '1', '95');
-INSERT INTO privileges VALUES ('2303', '1', '96');
-INSERT INTO privileges VALUES ('2304', '1', '97');
-INSERT INTO privileges VALUES ('2305', '1', '98');
-INSERT INTO privileges VALUES ('2306', '1', '99');
-INSERT INTO privileges VALUES ('2307', '1', '100');
-INSERT INTO privileges VALUES ('2308', '1', '101');
-INSERT INTO privileges VALUES ('2309', '1', '102');
-INSERT INTO privileges VALUES ('2310', '1', '103');
-INSERT INTO privileges VALUES ('2311', '1', '104');
-INSERT INTO privileges VALUES ('2312', '1', '105');
-INSERT INTO privileges VALUES ('2313', '1', '106');
-INSERT INTO privileges VALUES ('2314', '1', '107');
-INSERT INTO privileges VALUES ('2315', '1', '108');
-INSERT INTO privileges VALUES ('2316', '1', '109');
-INSERT INTO privileges VALUES ('2317', '1', '110');
-INSERT INTO privileges VALUES ('2318', '1', '111');
-INSERT INTO privileges VALUES ('2319', '1', '112');
-INSERT INTO privileges VALUES ('2320', '1', '113');
-INSERT INTO privileges VALUES ('2321', '1', '114');
-INSERT INTO privileges VALUES ('2322', '1', '115');
-INSERT INTO privileges VALUES ('2323', '1', '116');
-INSERT INTO privileges VALUES ('2324', '1', '117');
-INSERT INTO privileges VALUES ('2325', '1', '118');
-INSERT INTO privileges VALUES ('2326', '1', '119');
-INSERT INTO privileges VALUES ('2327', '1', '120');
+INSERT INTO privileges VALUES ('2577', '1', '1');
+INSERT INTO privileges VALUES ('2578', '1', '2');
+INSERT INTO privileges VALUES ('2579', '1', '3');
+INSERT INTO privileges VALUES ('2580', '1', '4');
+INSERT INTO privileges VALUES ('2581', '1', '5');
+INSERT INTO privileges VALUES ('2582', '1', '6');
+INSERT INTO privileges VALUES ('2583', '1', '7');
+INSERT INTO privileges VALUES ('2584', '1', '8');
+INSERT INTO privileges VALUES ('2585', '1', '9');
+INSERT INTO privileges VALUES ('2586', '1', '59');
+INSERT INTO privileges VALUES ('2587', '1', '60');
+INSERT INTO privileges VALUES ('2588', '1', '83');
+INSERT INTO privileges VALUES ('2589', '1', '84');
+INSERT INTO privileges VALUES ('2590', '1', '85');
+INSERT INTO privileges VALUES ('2591', '1', '86');
+INSERT INTO privileges VALUES ('2592', '1', '87');
+INSERT INTO privileges VALUES ('2593', '1', '88');
+INSERT INTO privileges VALUES ('2594', '1', '89');
+INSERT INTO privileges VALUES ('2595', '1', '90');
+INSERT INTO privileges VALUES ('2596', '1', '91');
+INSERT INTO privileges VALUES ('2597', '1', '92');
+INSERT INTO privileges VALUES ('2598', '1', '93');
+INSERT INTO privileges VALUES ('2599', '1', '94');
+INSERT INTO privileges VALUES ('2600', '1', '95');
+INSERT INTO privileges VALUES ('2601', '1', '96');
+INSERT INTO privileges VALUES ('2602', '1', '97');
+INSERT INTO privileges VALUES ('2603', '1', '98');
+INSERT INTO privileges VALUES ('2604', '1', '99');
+INSERT INTO privileges VALUES ('2605', '1', '100');
+INSERT INTO privileges VALUES ('2606', '1', '101');
+INSERT INTO privileges VALUES ('2607', '1', '102');
+INSERT INTO privileges VALUES ('2608', '1', '103');
+INSERT INTO privileges VALUES ('2609', '1', '104');
+INSERT INTO privileges VALUES ('2610', '1', '105');
+INSERT INTO privileges VALUES ('2611', '1', '106');
+INSERT INTO privileges VALUES ('2612', '1', '107');
+INSERT INTO privileges VALUES ('2613', '1', '108');
+INSERT INTO privileges VALUES ('2614', '1', '109');
+INSERT INTO privileges VALUES ('2615', '1', '110');
+INSERT INTO privileges VALUES ('2616', '1', '111');
+INSERT INTO privileges VALUES ('2617', '1', '112');
+INSERT INTO privileges VALUES ('2618', '1', '113');
+INSERT INTO privileges VALUES ('2619', '1', '114');
+INSERT INTO privileges VALUES ('2620', '1', '115');
+INSERT INTO privileges VALUES ('2621', '1', '116');
+INSERT INTO privileges VALUES ('2622', '1', '117');
+INSERT INTO privileges VALUES ('2623', '1', '118');
+INSERT INTO privileges VALUES ('2624', '1', '119');
+INSERT INTO privileges VALUES ('2625', '1', '120');
+INSERT INTO privileges VALUES ('2626', '2', '5');
+INSERT INTO privileges VALUES ('2627', '2', '6');
+INSERT INTO privileges VALUES ('2628', '2', '7');
+INSERT INTO privileges VALUES ('2629', '2', '8');
+INSERT INTO privileges VALUES ('2630', '2', '9');
 
 -- ----------------------------
 -- Table structure for `products`
@@ -281,9 +301,9 @@ CREATE TABLE `tbl_material` (
 -- ----------------------------
 -- Records of tbl_material
 -- ----------------------------
-INSERT INTO tbl_material VALUES ('2', 'K001', 'Stainless', '0', 'PCS', '100000', '4 x 4 Meter');
-INSERT INTO tbl_material VALUES ('3', 'K002', 'Pasir', '0', 'Kubik', '100000', '-');
-INSERT INTO tbl_material VALUES ('4', 'K003', 'Besi Baja', '0', 'KG', '1000000', '-');
+INSERT INTO tbl_material VALUES ('2', 'K001', 'Stainless', '10000', 'PCS', '100000', '4 x 4 Meter');
+INSERT INTO tbl_material VALUES ('3', 'K002', 'Pasir', '100000', 'Kubik', '100000', '-');
+INSERT INTO tbl_material VALUES ('4', 'K003', 'Besi Baja', '20000', 'KG', '1000000', '-');
 
 -- ----------------------------
 -- Table structure for `tbl_mesin`
@@ -313,13 +333,16 @@ CREATE TABLE `tbl_pasok` (
   `tgl_beli` varchar(12) COLLATE utf8_bin DEFAULT NULL,
   `qty` varchar(255) COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_bin ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_bin ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of tbl_pasok
 -- ----------------------------
 INSERT INTO tbl_pasok VALUES ('1', '2', '1', '1574623359', '2019-11-25', '10000');
 INSERT INTO tbl_pasok VALUES ('2', '3', '1', '1575121604', '2019-11-30', '10000');
+INSERT INTO tbl_pasok VALUES ('3', '2', '1', '1576855771', '2019-12-20', '10000');
+INSERT INTO tbl_pasok VALUES ('4', '3', '1', '1576855793', '2019-12-20', '100000');
+INSERT INTO tbl_pasok VALUES ('5', '4', '1', '1576855811', '2019-12-20', '20000');
 
 -- ----------------------------
 -- Table structure for `tbl_pekerja`
@@ -1004,12 +1027,13 @@ CREATE TABLE `users` (
   PRIMARY KEY (`id`),
   KEY `group_id` (`group_id`),
   CONSTRAINT `users_ibfk_1` FOREIGN KEY (`group_id`) REFERENCES `groups` (`id`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of users
 -- ----------------------------
 INSERT INTO users VALUES ('1', '1', 'John Doe', 'johndoe@native-theme.com', '123456', '0000-00-00 00:00:00', '2017-07-15 13:18:04');
+INSERT INTO users VALUES ('2', '1', 'Imam Hidayat', 'imam@gmail.com', '123456', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
 DELIMITER ;;
 CREATE TRIGGER `menambah_stock_jika_insert_data` AFTER INSERT ON `tbl_pasok` FOR EACH ROW UPDATE tbl_material
  SET jumlah = jumlah + NEW.qty WHERE id = New.material_id
