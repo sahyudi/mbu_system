@@ -1,128 +1,325 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Material extends CI_Controller
+class Material extends Base_Controller
 {
-    public function __construct()
-    {
-        parent::__construct();
-        // is_logged_in();
-        $this->load->model('Material_m', 'material');
-        // $this->load->model('Vendor_model', 'vendor');
-    }
 
-    function index()
+    /**
+     * List of Products
+     *
+     * @access 	public
+     * @param 	
+     * @return 	view
+     */
+
+    // public function __construct()
+    // {
+    //     parent::__construct();
+    //     // $this->load->model('Material_model', 'material');
+    //     // $this->load->model('Vendor_model', 'vendor');
+
+    // }
+
+    public function index()
     {
         $this->load->model('Project_m', 'project');
-        $this->data['title'] = 'Project';
-        $this->data['project'] = $this->project->getProject()->result_array();
+        $this->data['title'] = 'Vendor';
+        $this->data['material'] = $this->db->get('tbl_material')->result_array();
         $this->data['subview'] = 'material/main';
         $this->load->view('components/main', $this->data);
     }
 
-    function addMaterial()
+    /**
+     * Product Form
+     *
+     * @access 	public
+     * @param 	
+     * @return 	view
+     */
+
+    public function form()
     {
-        $data['title'] = 'Add Material';
-        $data['user'] = $this->db->get_where('tbl_user', ['username' => $this->session->userdata('username')])->row_array();
-        $data['material'] = $this->material->getMaterial()->result_array();
+        $data['index'] = $this->input->post('index');
+        $this->load->view('material/form', $data);
+    }
 
-        $this->form_validation->set_rules('kode', 'kode', 'required|trim|is_unique[tbl_material.kode]', [
-            'is_unique' => 'Kode ini sudah digunakan!!'
-        ]);
-        $this->form_validation->set_rules('proyek_no', 'No Proyek', 'required|trim');
-        $this->form_validation->set_rules('nama', 'Nama', 'required|trim');
-        $this->form_validation->set_rules('tgl_mulai', 'Tanggal Mulai', 'required|trim');
-        $this->form_validation->set_rules('tgl_selesai', 'Tanggal Selesai', 'required|trim');
-        $this->form_validation->set_rules('mesin', 'Mesin', 'required|trim');
-        $this->form_validation->set_rules('ruangan', 'Ruangan', 'required|trim');
-        $this->form_validation->set_rules('ruangan', 'Ruangan', 'required|trim');
+    /**
+     * Datagrid Data
+     *
+     * @access 	public
+     * @param 	
+     * @return 	json(array)
+     */
 
-        if ($this->form_validation->run() == false) {
-            $this->load->view('template/header', $data);
-            $this->load->view('template/sidebar', $data);
-            $this->load->view('template/navbar', $data);
-            $this->load->view('material/form-add', $data);
-            $this->load->view('template/footer');
+    public function data()
+    {
+        header('Content-Type: application/json');
+        $this->load->model('product_m');
+        echo json_encode($this->product_m->getJson($this->input->post()));
+    }
+
+    /**
+     * Validate Input
+     *
+     * @access 	public
+     * @param 	
+     * @return 	json(array)
+     */
+
+    public function validate()
+    {
+        $rules = [
+            [
+                'field' => 'product_name',
+                'label' => 'Product Name',
+                'rules' => 'required'
+            ],
+            [
+                'field' => 'price',
+                'label' => 'Price',
+                'rules' => 'required'
+            ],
+            [
+                'field' => 'stock',
+                'label' => 'Stock',
+                'rules' => 'required'
+            ],
+            [
+                'field' => 'images',
+                'label' => 'Images',
+                'rules' => 'required'
+            ],
+            [
+                'field' => 'description',
+                'label' => 'Description',
+                'rules' => 'required'
+            ]
+        ];
+
+        $this->form_validation->set_rules($rules);
+        if ($this->form_validation->run()) {
+            header("Content-type:application/json");
+            echo json_encode('success');
         } else {
-            $this->material->addMaterial();
-            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Material berhasil ditambahkan! </div>');
-            redirect('material');
+            header("Content-type:application/json");
+            echo json_encode($this->form_validation->get_all_errors());
         }
     }
 
+    /**
+     * Create Update Action
+     *
+     * @access 	public
+     * @param 	
+     * @return 	method
+     */
 
-    function deleteMaterial($id = null)
+    public function action()
     {
-        if ($id) {
-            if ($this->material->deleteMaterial($id)) {
-                $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Material berhasil dihapus! </div>');
-            } else {
-                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Material gagal dihapus!!</div>');
-            }
-            redirect('Material');
-        }
-    }
-
-    function editMaterial($id = null)
-    {
-        if ($id) {
-            $data = $this->material->getMaterial($id)->row_array();
-            echo json_encode($data);
-        }
-    }
-
-    function updateMaterial()
-    {
-        $id = $this->input->post('id');
-
-        if ($id) {
-            $this->material->updateMaterial($id);
-            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Material berhasil diperbarui! </div>');
+        if (!$this->input->post('id')) {
+            $this->create();
         } else {
-            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Material gagal diperbarui!!</div>');
+            $this->update();
+        }
+    }
+
+    /**
+     * Create a New Product
+     *
+     * @access 	public
+     * @param 	
+     * @return 	json(string)
+     */
+
+    public function create()
+    {
+        $data['product_name']     = $this->input->post('product_name');
+        $data['price']           = $this->input->post('price');
+        $data['stock']           = $this->input->post('stock');
+        $data['images']           = $this->input->post('images');
+        $data['description']       = $this->input->post('description');
+        $this->db->insert('products', $data);
+
+        header('Content-Type: application/json');
+        echo json_encode('success');
+    }
+
+    /**
+     * Update Existing Product
+     *
+     * @access 	public
+     * @param 	
+     * @return 	json(string)
+     */
+
+    public function update()
+    {
+        $data['product_name']     = $this->input->post('product_name');
+        $data['price']           = $this->input->post('price');
+        $data['stock']           = $this->input->post('stock');
+        $data['images']           = $this->input->post('images');
+        $data['description']       = $this->input->post('description');
+        $this->db->where('id', $this->input->post('id'));
+        $this->db->update('products', $data);
+
+        header('Content-Type: application/json');
+        echo json_encode('success');
+    }
+
+    /**
+     * Delete a Product
+     *
+     * @access 	public
+     * @param 	
+     * @return 	redirect
+     */
+
+    public function delete()
+    {
+        $this->db->where('id', $this->input->post('id'));
+        $this->db->delete('products');
+    }
+
+    function getProject($id = null)
+    {
+        $this->db->select('*');
+        if ($id) {
+            $this->db->where('id', $id);
+        }
+        return $this->db->get('tbl_proyek');
+    }
+
+    function getMaterial($no_proyek = null)
+    {
+        $this->db->select('A.*, B.nama');
+        $this->db->join('tbl_material B', 'A.material_id = B.id');
+        $this->db->where('A.proyek_no', $no_proyek);
+        return $this->db->get('tbl_proyek_material A');
+    }
+
+    function getMesinProyek($no_proyek = null)
+    {
+        $this->db->select('A.*, B.nama');
+        $this->db->join('tbl_mesin B', 'A.mesin_id = B.id');
+        $this->db->where('A.proyek_no', $no_proyek);
+        return $this->db->get('tbl_proyek_mesin A');
+    }
+
+    function getRuanganProyek($no_proyek = null)
+    {
+        $this->db->select('A.*, B.nama');
+        $this->db->join('tbl_ruangan B', 'A.ruangan_id = B.id');
+        $this->db->where('A.proyek_no', $no_proyek);
+        return $this->db->get('tbl_proyek_ruangan A');
+    }
+
+    function saveProject()
+    {
+        $data_ruangan = [];
+        $data_mesin = [];
+        $data_material = [];
+
+        $dateTime = date('Y-m-d H:i:s');
+
+        $ruangan = $this->input->post('ruangan');
+        $mesin = $this->input->post('mesin');
+        $item = $this->input->post('item');
+        $qty = $this->input->post('qty');
+        $no_proyek = $this->input->post('proyek_no');
+
+        $data = [
+            'proyek_no' => $no_proyek,
+            'nama' => $this->input->post('nama'),
+            'deskripsi' => $this->input->post('deskripsi'),
+            'tgl_mulai' => $this->input->post('tgl_mulai'),
+            'tgl_selesai' => $this->input->post('tgl_selesai'),
+            'tgl_selesai' => $this->input->post('tgl_selesai'),
+            'tgl_input' => $dateTime
+        ];
+
+        for ($i = 0; $i < count($ruangan); $i++) {
+            $data_ruangan[] = [
+                'proyek_no' => $no_proyek,
+                'ruangan_id' => $ruangan[$i],
+                'deskripsi' => $this->input->post('deskripsi')
+            ];
         }
 
-        redirect('material');
-    }
+        for ($j = 0; $j < count($mesin); $j++) {
+            $data_mesin[] = [
+                'proyek_no' => $no_proyek,
+                'mesin_id' => $mesin[$j]
+            ];
+        }
+
+        for ($k = 0; $k < count($item); $k++) {
+            $data_material[] = [
+                'proyek_no' => $no_proyek,
+                'material_id' => $item[$k],
+                'qty' => $qty[$k],
+                'tgl_input' => $dateTime
+            ];
+        }
 
 
-    function pasok()
-    {
-        $data['title'] = 'Pasok Material';
-        $data['user'] = $this->db->get_where('tbl_user', ['username' => $this->session->userdata('username')])->row_array();
-        $data['pasokMaterial'] = $this->material->getPasokMaterial()->result_array();
+        $this->db->trans_begin();
 
-        $this->load->view('template/header', $data);
-        $this->load->view('template/sidebar', $data);
-        $this->load->view('template/navbar', $data);
-        $this->load->view('material/pasok', $data);
-        $this->load->view('template/footer');
-    }
+        $this->db->insert_batch('tbl_proyek_ruangan', $data_ruangan);
+        $this->db->insert_batch('tbl_proyek_mesin', $data_mesin);
+        $this->db->insert_batch('tbl_proyek_material', $data_material);
+        $this->db->insert('tbl_proyek', $data);
 
-    function addPasok()
-    {
-        $data['title'] = 'Add Material';
-        $data['user'] = $this->db->get_where('tbl_user', ['username' => $this->session->userdata('username')])->row_array();
-        $data['material'] = $this->material->getMaterial()->result_array();
-        $data['vendor'] = $this->vendor->getVendor()->result_array();
-
-
-
-        $this->form_validation->set_rules('vendor_id', 'Vendor', 'required|trim');
-        $this->form_validation->set_rules('material_id', 'Material', 'required|trim');
-        $this->form_validation->set_rules('qty', 'Quantity', 'required|trim');
-        $this->form_validation->set_rules('tgl_beli', 'Tanggal', 'required|trim');
-
-        if ($this->form_validation->run() == false) {
-            $this->load->view('template/header', $data);
-            $this->load->view('template/sidebar', $data);
-            $this->load->view('template/navbar', $data);
-            $this->load->view('material/form-add-pasok', $data);
-            $this->load->view('template/footer');
+        if ($this->db->trans_status() === FALSE) {
+            $this->db->trans_rollback();
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Project gagal ditambahkan! </div>');
         } else {
-            $this->material->addPasok();
-            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Material berhasil ditambahkan! </div>');
-            redirect('material/pasok');
+            $this->db->trans_commit();
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Project berhasil ditambahkan! </div>');
+        }
+    }
+
+
+    function getMesin($id = null)
+    {
+        $this->db->select('*');
+        if ($id) {
+            $this->db->where('id', $id);
+        }
+        return $this->db->get('tbl_mesin');
+    }
+
+    function saveMesin($id = null)
+    {
+        $data = [
+            'nama' => $this->input->post('nama'),
+            'deskripsi' => $this->input->post('deskripsi')
+        ];
+        if ($id) {
+            $this->db->update('tbl_mesin', $data, ['id' => $id]);
+        } else {
+            $this->db->insert('tbl_mesin', $data);
+        }
+    }
+
+    function getRuangan($id = null)
+    {
+        $this->db->select('*');
+        if ($id) {
+            $this->db->where('id', $id);
+        }
+        return $this->db->get('tbl_ruangan');
+    }
+
+    function saveRuangan($id = null)
+    {
+        $data = [
+            'nama' => $this->input->post('nama'),
+            'deskripsi' => $this->input->post('deskripsi')
+        ];
+        if ($id) {
+            $this->db->update('tbl_ruangan', $data, ['id' => $id]);
+        } else {
+            $this->db->insert('tbl_ruangan', $data);
         }
     }
 }

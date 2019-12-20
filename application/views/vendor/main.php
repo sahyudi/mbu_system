@@ -47,7 +47,7 @@
                                             <td><?= $ven['alamat'] ?></td>
                                             <td>
                                                 <a href="#" class="btn-edit" data-toggle="modal" data-target="#modal-vendor" data-id="<?= $ven['id'] ?>"><i class="fa fa-pencil-alt"></i> Edit</a>
-                                                <a href="<?= base_url('vendor/deleteVendor/') . $ven['id'] ?>" onclick="return deleteConfirm()"><i class="fa fa-trash-alt"></i> Delete</a>
+                                                <a href="javascript:;" onclick="delete_action(<?= $ven['id'] ?>)"><i class="fa fa-trash-alt"></i> Delete</a>
                                             </td>
                                         </tr>
                                     <?php } ?>
