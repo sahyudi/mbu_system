@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50626
 File Encoding         : 65001
 
-Date: 2019-12-21 00:53:30
+Date: 2019-12-21 01:39:47
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -44,7 +44,7 @@ CREATE TABLE `menus` (
   `link` varchar(150) NOT NULL,
   `icon` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=122 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=123 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of menus
@@ -61,6 +61,10 @@ INSERT INTO menus VALUES ('9', '5', '0', 'Ruangan', 'project/ruangan', 'i i-idot
 INSERT INTO menus VALUES ('10', '0', '0', 'Vendor', 'vendor', 'fa fa-parachute-box');
 INSERT INTO menus VALUES ('12', '0', '2', 'Material', '', 'fa fa-clipboard-list');
 INSERT INTO menus VALUES ('13', '12', '0', 'Stock', 'material', 'i i-idot');
+INSERT INTO menus VALUES ('14', '12', '0', 'Pengadaan', 'pengadaan', 'i i-idot');
+INSERT INTO menus VALUES ('15', '0', '0', 'Mesin', 'mesin', 'fa fa-cogs');
+INSERT INTO menus VALUES ('16', '0', '0', 'Laboratorium', 'laboratorium', 'fa fa-house-damage');
+INSERT INTO menus VALUES ('17', '0', '0', 'Pelanggan', 'pelanggan', 'fa fa-users');
 INSERT INTO menus VALUES ('59', '0', '0', 'Products', 'product', 'fa fa-database');
 INSERT INTO menus VALUES ('60', '0', '0', 'Transactions', 'transaction', 'fa fa-dollar');
 INSERT INTO menus VALUES ('83', '0', '2', 'Menu Styles', '', 'fa fa-random');
@@ -101,7 +105,6 @@ INSERT INTO menus VALUES ('117', '109', '0', 'Simple Line', 'template/simple_lin
 INSERT INTO menus VALUES ('118', '109', '0', 'Themify', 'template/themify', 'i i-dot');
 INSERT INTO menus VALUES ('119', '109', '0', 'Typeicon', 'template/typeicon', 'i i-dot');
 INSERT INTO menus VALUES ('120', '109', '0', 'Weather Icon', 'template/weather_icon', 'i i-dot');
-INSERT INTO menus VALUES ('121', '12', '0', 'Pengadaan', 'pengadaan', 'i i-idot');
 
 -- ----------------------------
 -- Table structure for `migrations`
@@ -147,31 +150,42 @@ CREATE TABLE `privileges` (
   KEY `menu_id` (`menu_id`),
   CONSTRAINT `privileges_ibfk_1` FOREIGN KEY (`group_id`) REFERENCES `groups` (`id`) ON UPDATE CASCADE,
   CONSTRAINT `privileges_ibfk_2` FOREIGN KEY (`menu_id`) REFERENCES `menus` (`id`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2978 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3090 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of privileges
 -- ----------------------------
-INSERT INTO privileges VALUES ('2626', '2', '5');
-INSERT INTO privileges VALUES ('2627', '2', '6');
-INSERT INTO privileges VALUES ('2628', '2', '7');
-INSERT INTO privileges VALUES ('2629', '2', '8');
-INSERT INTO privileges VALUES ('2630', '2', '9');
-INSERT INTO privileges VALUES ('2963', '1', '1');
-INSERT INTO privileges VALUES ('2964', '1', '2');
-INSERT INTO privileges VALUES ('2965', '1', '3');
-INSERT INTO privileges VALUES ('2966', '1', '4');
-INSERT INTO privileges VALUES ('2967', '1', '5');
-INSERT INTO privileges VALUES ('2968', '1', '6');
-INSERT INTO privileges VALUES ('2969', '1', '7');
-INSERT INTO privileges VALUES ('2970', '1', '8');
-INSERT INTO privileges VALUES ('2971', '1', '9');
-INSERT INTO privileges VALUES ('2972', '1', '10');
-INSERT INTO privileges VALUES ('2973', '1', '12');
-INSERT INTO privileges VALUES ('2974', '1', '13');
-INSERT INTO privileges VALUES ('2975', '1', '121');
-INSERT INTO privileges VALUES ('2976', '1', '59');
-INSERT INTO privileges VALUES ('2977', '1', '60');
+INSERT INTO privileges VALUES ('3059', '2', '5');
+INSERT INTO privileges VALUES ('3060', '2', '6');
+INSERT INTO privileges VALUES ('3061', '2', '7');
+INSERT INTO privileges VALUES ('3062', '2', '8');
+INSERT INTO privileges VALUES ('3063', '2', '9');
+INSERT INTO privileges VALUES ('3064', '2', '10');
+INSERT INTO privileges VALUES ('3065', '2', '12');
+INSERT INTO privileges VALUES ('3066', '2', '13');
+INSERT INTO privileges VALUES ('3067', '2', '14');
+INSERT INTO privileges VALUES ('3068', '2', '15');
+INSERT INTO privileges VALUES ('3069', '2', '16');
+INSERT INTO privileges VALUES ('3070', '2', '59');
+INSERT INTO privileges VALUES ('3071', '2', '60');
+INSERT INTO privileges VALUES ('3072', '1', '1');
+INSERT INTO privileges VALUES ('3073', '1', '2');
+INSERT INTO privileges VALUES ('3074', '1', '3');
+INSERT INTO privileges VALUES ('3075', '1', '4');
+INSERT INTO privileges VALUES ('3076', '1', '5');
+INSERT INTO privileges VALUES ('3077', '1', '6');
+INSERT INTO privileges VALUES ('3078', '1', '7');
+INSERT INTO privileges VALUES ('3079', '1', '8');
+INSERT INTO privileges VALUES ('3080', '1', '9');
+INSERT INTO privileges VALUES ('3081', '1', '10');
+INSERT INTO privileges VALUES ('3082', '1', '12');
+INSERT INTO privileges VALUES ('3083', '1', '13');
+INSERT INTO privileges VALUES ('3084', '1', '14');
+INSERT INTO privileges VALUES ('3085', '1', '15');
+INSERT INTO privileges VALUES ('3086', '1', '16');
+INSERT INTO privileges VALUES ('3087', '1', '17');
+INSERT INTO privileges VALUES ('3088', '1', '59');
+INSERT INTO privileges VALUES ('3089', '1', '60');
 
 -- ----------------------------
 -- Table structure for `products`
@@ -284,7 +298,7 @@ CREATE TABLE `tbl_mesin` (
 -- ----------------------------
 -- Records of tbl_mesin
 -- ----------------------------
-INSERT INTO tbl_mesin VALUES ('2', 'Lab 101 test', 'Test 1234');
+INSERT INTO tbl_mesin VALUES ('2', 'CNC ', 'Test 1234');
 
 -- ----------------------------
 -- Table structure for `tbl_pasok`
@@ -323,6 +337,23 @@ CREATE TABLE `tbl_pekerja` (
 -- ----------------------------
 -- Records of tbl_pekerja
 -- ----------------------------
+
+-- ----------------------------
+-- Table structure for `tbl_pelanggan`
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_pelanggan`;
+CREATE TABLE `tbl_pelanggan` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nama` varchar(128) DEFAULT NULL,
+  `no_hp` varchar(16) DEFAULT NULL,
+  `alamat` text,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of tbl_pelanggan
+-- ----------------------------
+INSERT INTO tbl_pelanggan VALUES ('1', 'PT Sahyudi', '085374131481', 'Tiban dongs');
 
 -- ----------------------------
 -- Table structure for `tbl_produk`
