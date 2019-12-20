@@ -133,7 +133,7 @@
 				<div class="user-top-profile">
 					<div class="user-image">
 						<div class="user-on"></div>
-						<img alt="pongo" src="<?php echo base_url() . 'assets/images/profile.png'; ?>">
+						<img alt="pongo" src="<?php echo base_url() . 'assets/images/profile.jpg'; ?>">
 					</div>
 					<div class="clear">
 						<div class="user-name"><?php echo $active_user->name; ?></div>
@@ -257,7 +257,8 @@
 		<div class="user-side-profile">
 			<div class="user-image">
 				<div class="user-on"></div>
-				<img alt="pongo" src="<?php echo base_url() . 'assets/images/profile.png'; ?>">
+				<img alt="pongo" src="<?php echo base_url() . 'assets/images/profile.jpg'; ?>" style="width: 100%;
+    height: 100%;">
 			</div>
 			<div class="clear">
 				<div class="user-name"><?php echo $active_user->name; ?></div>

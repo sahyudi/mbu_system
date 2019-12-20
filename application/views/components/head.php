@@ -39,6 +39,7 @@
     <link rel="stylesheet" href="<?php echo base_url() . 'assets/plugins/jquery-treegrid/jquery.treegrid.css'; ?>" />
     <link rel="stylesheet" href="<?php echo base_url() . 'assets/css/main.css'; ?>" />
     <link rel="stylesheet" href="<?php echo base_url() . 'assets/css/custom.css'; ?>" />
+    <link rel="stylesheet" href="<?php echo base_url() . 'assets/css/css/all.css'; ?>" />
 
     <script type="text/javascript" src="<?php echo base_url() . 'assets/plugins/jquery/jquery-2.1.1.min.js'; ?>"></script>
     <script type="text/javascript" src="<?php echo base_url() . 'assets/plugins/jquery-count-to/jquery.countTo.js'; ?>"></script>

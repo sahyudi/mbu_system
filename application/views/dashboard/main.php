@@ -124,7 +124,7 @@
 										<div class="status-pill green"></div>
 									</td>
 									<td class="text-right">Rp. 2.000.000</td>
-									<td class="text-center"><i class="fa fa-pencil"></i> <i class="fa fa-trash"></i></td>
+									<td class="text-center"><i class="fa fa-pencil-alt"></i> <i class="fa fa-trash-alt"></i></td>
 								</tr>
 								<tr>
 									<th><input type="checkbox"></th>
@@ -134,7 +134,7 @@
 										<div class="status-pill red"></div>
 									</td>
 									<td class="text-right">Rp. 2.500.000</td>
-									<td class="text-center"><i class="fa fa-pencil"></i> <i class="fa fa-trash"></i></td>
+									<td class="text-center"><i class="fa fa-pencil-alt"></i> <i class="fa fa-trash-alt"></i></td>
 								</tr>
 								<tr>
 									<th><input type="checkbox"></th>
@@ -144,7 +144,7 @@
 										<div class="status-pill yellow"></div>
 									</td>
 									<td class="text-right">Rp. 3.000.000</td>
-									<td class="text-center"><i class="fa fa-pencil"></i> <i class="fa fa-trash"></i></td>
+									<td class="text-center"><i class="fa fa-pencil-alt"></i> <i class="fa fa-trash-alt"></i></td>
 								</tr>
 								<tr>
 									<th><input type="checkbox"></th>
@@ -154,7 +154,7 @@
 										<div class="status-pill green"></div>
 									</td>
 									<td class="text-right">Rp. 2.800.000</td>
-									<td class="text-center"><i class="fa fa-pencil"></i> <i class="fa fa-trash"></i></td>
+									<td class="text-center"><i class="fa fa-pencil-alt"></i> <i class="fa fa-trash-alt"></i></td>
 								</tr>
 							</tbody>
 						</table>

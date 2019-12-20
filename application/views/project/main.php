@@ -49,8 +49,8 @@
                                             <td><?= $pro['deskripsi'] ?></td>
                                             <td>
                                                 <a href="<?= base_url('project/detailProject/') . $pro['id'] ?>" class=""><i class="fa fa-arrows-alt"></i> detail</a>
-                                                <a href="#" data-id="<?= $pro['id']; ?>" data-target="#edit-proyek" data-toggle="modal" class="btn-edit"><i class="fa fa-pencil"></i> Edit</a>
-                                                <a href="javascript:;" onclick="delete_action(<?= $pro['id'] ?>)" class=""><i class="fa fa-trash-o"></i> delete</a>
+                                                <a href="#" data-id="<?= $pro['id']; ?>" data-target="#edit-proyek" data-toggle="modal" class="btn-edit"><i class="fa fa-pencil-alt"></i> Edit</a>
+                                                <a href="javascript:;" onclick="delete_action(<?= $pro['id'] ?>)" class=""><i class="fa fa-trash-alt"></i> delete</a>
                                             </td>
                                         </tr>
                                     <?php } ?>
