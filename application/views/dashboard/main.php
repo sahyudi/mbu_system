@@ -1,6 +1,6 @@
-<div class="top-banner" style="background-image: url(<?= base_url() ?>/assets/images/mbu2.png); color: #090808;">
-	<div class="top-banner-title">Dashboard</div>
-	<div class="top-banner-subtitle">Welcome back, <?php echo $active_user->name; ?>, <i class="fa fa-map-marker"></i> Batam City</div>
+<div class="top-banner" style="background-image: url(<?= base_url() ?>/assets/images/mbu.png); background-color:aliceblue; background-size:100% 100%; padding:100px; color:black;">
+	<div class="top-banner-title mb-0">Dashboard</div>
+	<div class="top-banner-subtitle mb-0">Welcome back, <?php echo $active_user->name; ?>, <i class="fa fa-map-marker"></i> Batam City</div>
 </div>
 <div class="content with-top-banner">
 	<div class="content-header no-mg-top">
@@ -79,7 +79,7 @@
 						<div class="card-title">
 							<span class="timer" data-from="0" data-to="20">20</span>
 						</div>
-						<div class="card-subtitle">MEETING</div>
+						<div class="card-subtitle">EMPLOYEE</div>
 					</div>
 				</div>
 				<div class="card-menu">

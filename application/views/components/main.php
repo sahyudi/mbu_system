@@ -29,7 +29,7 @@
 						<input class="form-control mb-1 mr-sm-1 mb-sm-0" placeholder="Search projects..." type="text">
 					</form>
 				</div>
-				<div class="top-notification">
+				<!-- <div class="top-notification">
 					<div class="notification-icon">
 						<i class="fa fa-envelope-open"></i>
 					</div>
@@ -129,7 +129,7 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> -->
 				<div class="user-top-profile">
 					<div class="user-image">
 						<div class="user-on"></div>
@@ -153,7 +153,7 @@
 </div>
 <div class="wrapper <?php echo $menu_style != 'default' ? $menu_style : ''; ?>">
 	<aside class="side-nav">
-		<div class="side-notification">
+		<!-- <div class="side-notification">
 			<div class="notification-icon">
 				<i class="fa fa-envelope-open"></i>
 			</div>
@@ -253,7 +253,7 @@
 					</div>
 				</div>
 			</div>
-		</div>
+		</div> -->
 		<div class="user-side-profile">
 			<div class="user-image">
 				<div class="user-on"></div>
@@ -288,9 +288,9 @@
 									<i class="<?php echo $menu->icon; ?>"></i>
 									<span><?php echo $menu->title; ?></span>
 									<?php if ($key == 0) { ?>
-										<div class="badge badge-red pull-right">21</div>
+										<!-- <div class="badge badge-red pull-right">21</div> -->
 									<?php } elseif ($key == 6) { ?>
-										<div class="badge badge-grey pull-right">121</div>
+										<!-- <div class="badge badge-grey pull-right">121</div> -->
 									<?php } ?>
 								</a>
 								<ul>
@@ -326,9 +326,9 @@
 									<i class="<?php echo $menu->icon; ?>"></i>
 									<span><?php echo $menu->title; ?></span>
 									<?php if ($key == 0) { ?>
-										<div class="badge badge-red pull-right">21</div>
+										<!-- <div class="badge badge-red pull-right">21</div> -->
 									<?php } elseif ($key == 6) { ?>
-										<div class="badge badge-grey pull-right">121</div>
+										<!-- <div class="badge badge-grey pull-right">121</div> -->
 									<?php } ?>
 								</a>
 								<ul>

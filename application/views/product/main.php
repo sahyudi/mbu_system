@@ -25,7 +25,9 @@
 							</div>
 						</div>
 						<div class="table-responsive">
-							<table class="table table-striped table-bordered" id="datagrid"></table>
+							<table class="table table-striped table-bordered" id="datagrid">
+								
+							</table>
 						</div>
 						<div class="content-box-footer">
 							<div class="row">
