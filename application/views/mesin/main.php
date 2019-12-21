@@ -30,7 +30,7 @@
                                     <tr>
                                         <th class="text-center">No</th>
                                         <th scope="col">Nama</th>
-                                        <th scope="col">Deskirpsi</th>
+                                        <th scope="col">Deskripsi</th>
                                         <th class="text-center">Actions</th>
                                     </tr>
                                 </thead>
