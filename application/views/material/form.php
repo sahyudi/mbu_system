@@ -26,7 +26,7 @@
                         </div>
                         <div class="form-group">
                             <label for="email">Jumlah</label>
-                            <input id="jumlah" type="number" class="form-control" name="jumlah">
+                            <input id="jumlah" type="text" class="form-control" name="jumlah">
                             <div class="validation-message" data-field="jumlah"></div>
                         </div>
                         <div class="form-group">
@@ -36,11 +36,11 @@
                         </div>
                         <div class="form-group">
                             <label for="email">Harga / Satuan</label>
-                            <input id="harga_unit" type="number" class="form-control" name="harga_unit">
+                            <input id="harga_unit" type="text" class="form-control" name="harga_unit">
                             <div class="validation-message" data-field="harga_unit"></div>
                         </div>
                         <div class="form-group">
-                            <label for="email">Ukuran</label>
+                            <label for="email">Deksripsi</label>
                             <input id="ukuran" type="text" class="form-control" name="ukuran">
                             <div class="validation-message" data-field="ukuran"></div>
                         </div>
@@ -60,25 +60,8 @@
     var onLoad = (function() {
         var index = "<?php echo $index; ?>";
 
-        var uploader = $('.picker-uploader').uploader({
-            upload_url: '<?php echo base_url() . 'uploader/upload'; ?>',
-            file_picker_url: '<?php echo base_url() . 'uploader/files'; ?>',
-            input_name: 'images',
-            maximum_total_files: 4,
-            maximum_file_size: 50009000,
-            file_types_allowed: ['image/jpeg', 'image/png', 'image/vnd.adobe.photoshop'],
-            on_error: function(err) {
-                swal({
-                    title: "Upload Failed",
-                    text: err.messages,
-                    type: "warning"
-                })
-            }
-        })
-
         if (index != '') {
             datagrid.formLoad('#form-action', index);
-            uploader.set_files(datagrid.getRowData(index).images)
         }
 
         $('.loading-panel').hide();
@@ -90,7 +73,7 @@
         $('#form-action').disable([".action"]);
         $("button[title='save']").html("Validating data, please wait...");
         $.ajax({
-            url: "<?php echo base_url() . 'product/validate'; ?>",
+            url: "<?php echo base_url() . 'material/validate'; ?>",
             async: false,
             type: 'POST',
             data: formData,
@@ -119,7 +102,7 @@
 
     function save(formData) {
         $("button[title='save']").html("Saving data, please wait...");
-        $.post("<?php echo base_url() . 'product/action'; ?>", formData).done(function(data) {
+        $.post("<?php echo base_url() . 'material/action'; ?>", formData).done(function(data) {
             $('.datagrid-panel').fadeIn();
             $('.form-panel').fadeOut();
             datagrid.reload();

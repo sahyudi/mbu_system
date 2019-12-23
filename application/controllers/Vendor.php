@@ -24,7 +24,6 @@ class Vendor extends Base_Controller
     {
         $this->load->model('Project_m', 'project');
         $this->data['title'] = 'Vendor';
-        $this->data['vendor'] = $this->db->get('tbl_vendor')->result_array();
         $this->data['subview'] = 'vendor/main';
         $this->load->view('components/main', $this->data);
     }

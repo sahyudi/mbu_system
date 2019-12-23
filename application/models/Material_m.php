@@ -1,70 +1,81 @@
 <?php
-defined('BASEPATH') or exit('No direct script access allowed');
 
 class Material_m extends CI_Model
 {
-    public function getMaterial($id = null)
-    {
-        $this->db->select('*');
-        if ($id) {
-            $this->db->where('id', $id);
-        }
-        return $this->db->get('tbl_material');
-    }
 
-    function addMaterial()
-    {
-        $data = [
-            'kode' => $this->input->post('kode'),
-            'nama' => $this->input->post('nama'),
-            'jumlah' => $this->input->post('jumlah'),
-            'satuan' => $this->input->post('satuan'),
-            'harga_unit' => $this->input->post('harga_unit'),
-            'ukuran' => $this->input->post('ukuran')
-        ];
+	function __construct()
+	{
+		parent::__construct();
+		$this->load->library('datagrid');
+	}
 
-        // print_r($data);
-        // die;
-        $this->db->insert('tbl_material', $data);
-    }
+	/**
+	 * Check User Credentials
+	 *
+	 * @access 	public
+	 * @param 	
+	 * @return 	json(array)
+	 */
 
-    function deleteMaterial($id)
-    {
-        $this->db->delete('tbl_material', ['id' => $id]);
-    }
+	public function attempt($input)
+	{
+		$query = $this->db->from('users u')
+			->select('u.*, g.group_name')
+			->where('email', $input['email'])
+			->where('password', $input['password'])
+			->join('groups as g', 'g.id = u.id', 'left')
+			->get();
 
-    function updateMaterial($id = null)
-    {
-        $data = [
-            'kode' => $this->input->post('kode'),
-            'nama' => $this->input->post('nama'),
-            'satuan' => $this->input->post('satuan'),
-            'harga_unit' => $this->input->post('harga_unit'),
-            'ukuran' => $this->input->post('ukuran')
-        ];
-        $this->db->update('tbl_material', $data, ['id' => $id]);
-    }
+		return $query->row();
+	}
 
-    function getPasokMaterial($id = null)
-    {
-        $this->db->select('A.id AS id,A.qty AS jumlah_pembelian, A.tgl_beli, A.no_pembelian,  B.nama AS nama_barang, B.kode AS kode_barang, C.nama AS nama_vendor ');
-        if ($id) {
-            $this->db->where('id', $id);
-        }
-        $this->db->join('tbl_material B', 'A.material_id = B.id');
-        $this->db->join('tbl_vendor C', 'A.vendor_id = C.id');
-        return $this->db->get('tbl_pasok A');
-    }
+	/**
+	 * Get User by ID
+	 *
+	 * @access 	public
+	 * @param 	
+	 * @return 	json(array)
+	 */
 
-    function addPasok()
-    {
-        $data = [
-            'no_pembelian' => $this->input->post('no_pembelian'),
-            'vendor_id' => $this->input->post('vendor_id'),
-            'material_id' => $this->input->post('material_id'),
-            'tgl_beli' => $this->input->post('tgl_beli'),
-            'qty' => $this->input->post('qty')
-        ];
-        $this->db->insert('tbl_pasok', $data);
-    }
+	public function get_user($id)
+	{
+		$query = $this->db->from('users u')
+			->select('u.*, g.group_name')
+			->where('u.id', $id)
+			->join('groups as g', 'g.id = u.id', 'left')
+			->get();
+
+		return $query->row();
+	}
+
+	/**
+	 * Datagrid Data
+	 *
+	 * @access 	public
+	 * @param 	
+	 * @return 	json(array)
+	 */
+
+	public function getJson($input)
+	{
+		$table  = 'tbl_material as a';
+		$select = 'a.*';
+
+		$replace_field  = [
+			['old_name' => 'nama', 'new_name' => 'a.nama']
+		];
+
+		$param = [
+			'input'     => $input,
+			'select'    => $select,
+			'table'     => $table,
+			'replace_field' => $replace_field
+		];
+
+		$data = $this->datagrid->query($param, function ($data) use ($input) {
+			return $data;
+		});
+
+		return $data;
+	}
 }

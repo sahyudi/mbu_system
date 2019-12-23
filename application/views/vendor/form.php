@@ -16,22 +16,22 @@
                         <input type="text" name="id" class="hidden">
                         <div class="form-group">
                             <label for="name">Kode</label>
-                            <input id="kode" type="text" class="form-control" name="kode" required autofocus>
+                            <input id="kode" type="text" class="form-control" name="kode">
                             <div class="validation-message" data-field="kode"></div>
                         </div>
                         <div class="form-group">
                             <label for="name">Nama</label>
-                            <input id="nama" type="text" class="form-control" name="nama" required autofocus>
+                            <input id="nama" type="text" class="form-control" name="nama">
                             <div class="validation-message" data-field="nama"></div>
                         </div>
                         <div class="form-group">
                             <label for="email">No HP</label>
-                            <input id="no_hp" type="text" class="form-control" name="no_hp" required autofocus>
+                            <input id="no_hp" type="text" class="form-control" name="no_hp">
                             <div class="validation-message" data-field="no_hp"></div>
                         </div>
                         <div class="form-group">
                             <label for="email">Alamat</label>
-                            <textarea name="alamat" id="alamat" class="form-control" required autofocus></textarea>
+                            <textarea name="alamat" id="alamat" class="form-control"></textarea>
                             <div class="validation-message" data-field="alamat"></div>
                         </div>
                     </form>

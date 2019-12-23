@@ -22,9 +22,7 @@ class Material extends Base_Controller
 
     public function index()
     {
-        $this->load->model('Project_m', 'project');
-        $this->data['title'] = 'Vendor';
-        $this->data['material'] = $this->db->get('tbl_material')->result_array();
+        $this->data['title'] = 'Material';
         $this->data['subview'] = 'material/main';
         $this->load->view('components/main', $this->data);
     }
@@ -54,8 +52,8 @@ class Material extends Base_Controller
     public function data()
     {
         header('Content-Type: application/json');
-        $this->load->model('product_m');
-        echo json_encode($this->product_m->getJson($this->input->post()));
+        $this->load->model('material_m');
+        echo json_encode($this->material_m->getJson($this->input->post()));
     }
 
     /**
@@ -70,30 +68,36 @@ class Material extends Base_Controller
     {
         $rules = [
             [
-                'field' => 'product_name',
-                'label' => 'Product Name',
+                'field' => 'kode',
+                'label' => 'Kode',
                 'rules' => 'required'
             ],
             [
-                'field' => 'price',
-                'label' => 'Price',
+                'field' => 'nama',
+                'label' => 'Nama',
                 'rules' => 'required'
             ],
             [
-                'field' => 'stock',
-                'label' => 'Stock',
+                'field' => 'jumlah',
+                'label' => 'Jumlah',
                 'rules' => 'required'
             ],
             [
-                'field' => 'images',
-                'label' => 'Images',
+                'field' => 'satuan',
+                'label' => 'Satuan',
                 'rules' => 'required'
             ],
             [
-                'field' => 'description',
-                'label' => 'Description',
+                'field' => 'ukuran',
+                'label' => 'Deskripsi',
+                'rules' => 'required'
+            ],
+            [
+                'field' => 'harga_unit',
+                'label' => 'Harga / Satuan',
                 'rules' => 'required'
             ]
+
         ];
 
         $this->form_validation->set_rules($rules);
@@ -133,12 +137,13 @@ class Material extends Base_Controller
 
     public function create()
     {
-        $data['product_name']     = $this->input->post('product_name');
-        $data['price']           = $this->input->post('price');
-        $data['stock']           = $this->input->post('stock');
-        $data['images']           = $this->input->post('images');
-        $data['description']       = $this->input->post('description');
-        $this->db->insert('products', $data);
+        $data['kode']     = $this->input->post('kode');
+        $data['nama']           = $this->input->post('nama');
+        $data['jumlah']           = $this->input->post('jumlah');
+        $data['satuan']           = $this->input->post('satuan');
+        $data['harga_unit']       = $this->input->post('harga_unit');
+        $data['ukuran']       = $this->input->post('ukuran');
+        $this->db->insert('tbl_material', $data);
 
         header('Content-Type: application/json');
         echo json_encode('success');
@@ -154,13 +159,14 @@ class Material extends Base_Controller
 
     public function update()
     {
-        $data['product_name']     = $this->input->post('product_name');
-        $data['price']           = $this->input->post('price');
-        $data['stock']           = $this->input->post('stock');
-        $data['images']           = $this->input->post('images');
-        $data['description']       = $this->input->post('description');
+        $data['kode']     = $this->input->post('kode');
+        $data['nama']           = $this->input->post('nama');
+        $data['jumlah']           = $this->input->post('jumlah');
+        $data['satuan']           = $this->input->post('satuan');
+        $data['harga_unit']       = $this->input->post('harga_unit');
+        $data['ukuran']       = $this->input->post('ukuran');
         $this->db->where('id', $this->input->post('id'));
-        $this->db->update('products', $data);
+        $this->db->update('tbl_material', $data);
 
         header('Content-Type: application/json');
         echo json_encode('success');
@@ -177,7 +183,7 @@ class Material extends Base_Controller
     public function delete()
     {
         $this->db->where('id', $this->input->post('id'));
-        $this->db->delete('products');
+        $this->db->delete('tbl_material');
     }
 
     function getProject($id = null)
