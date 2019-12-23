@@ -9,6 +9,12 @@ class Vendor_m extends CI_Model
         $this->load->library('datagrid');
     }
 
+    public function all()
+    {
+        $groups = $this->db->get('tbl_vendor')->result();
+        return $groups;
+    }
+
     /**
      * Check User Credentials
      *

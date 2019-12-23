@@ -1,19 +1,13 @@
 <?php
 
-class Material_m extends CI_Model
+class Pengadaan_m extends CI_Model
 {
 
 	function __construct()
 	{
 		parent::__construct();
 		$this->load->library('datagrid');
-    }
-    
-    public function all()
-    {
-        $groups = $this->db->get('tbl_material')->result();
-        return $groups;
-    }
+	}
 
 	/**
 	 * Check User Credentials
@@ -34,26 +28,7 @@ class Material_m extends CI_Model
 
 		return $query->row();
 	}
-
-	/**
-	 * Get User by ID
-	 *
-	 * @access 	public
-	 * @param 	
-	 * @return 	json(array)
-	 */
-
-	public function get_user($id)
-	{
-		$query = $this->db->from('users u')
-			->select('u.*, g.group_name')
-			->where('u.id', $id)
-			->join('groups as g', 'g.id = u.id', 'left')
-			->get();
-
-		return $query->row();
-	}
-
+	
 	/**
 	 * Datagrid Data
 	 *
@@ -64,11 +39,11 @@ class Material_m extends CI_Model
 
 	public function getJson($input)
 	{
-		$table  = 'tbl_material as a';
-		$select = 'a.*';
+		$table  = 'tbl_pasok as a';
+		$select = 'a.*, m.nama as nama_material, v.nama as nama_vendor';
 
 		$replace_field  = [
-			['old_name' => 'nama', 'new_name' => 'a.nama']
+			['old_name' => 'nama', 'new_name' => 'a.nama'],
 		];
 
 		$param = [
@@ -79,7 +54,8 @@ class Material_m extends CI_Model
 		];
 
 		$data = $this->datagrid->query($param, function ($data) use ($input) {
-			return $data;
+            return $data->join('tbl_material as m', 'm.id = a.material_id', 'left')
+                        ->join('tbl_vendor as v','v.id = a.vendor_id','left');
 		});
 
 		return $data;

@@ -16,15 +16,15 @@
                         <input type="text" name="id" class="hidden">
                         <div class="form-group">
                             <label for="email">No Surat</label>
-                            <input id="no_pembelian" type="text" class="form-control" name="no_pembelian">
+                            <input id="no_pembelian" type="text" class="form-control" value="<?= time() ?>" name="no_pembelian" readonly>
                             <div class="validation-message" data-field="no_pembelian"></div>
                         </div>
                         <div class="form-group">
                             <label for="name">Vendor</label>
                             <select name="vendor_id" id="vendor_id" class="form-control select2">
                                 <option value=""></option>
-                                <?php foreach ($vendor as $key) { ?>
-                                    <option value="<?= $key['id'] ?>"><?= $key['nama'] ?></option>
+                                <?php foreach ($vendor as $key => $v) { ?>
+                                    <option value="<?= $v->id ?>"><?= $v->kode." - ".$v->nama ?></option>
                                 <?php } ?>
                             </select>
                             <div class="validation-message" data-field="vendor_id"></div>
@@ -33,8 +33,8 @@
                             <label for="name">Material</label>
                             <select name="material_id" id="material_id" class="form-control select2">
                                 <option value=""></option>
-                                <?php foreach ($material as $m) { ?>
-                                    <option value="<?= $m['id'] ?>"><?= $m['nama'] ?></option>
+                                <?php foreach ($material as $key => $m) { ?>
+                                    <option value="<?= $m->id ?>"><?= $m->kode." - ".$m->nama ?></option>
                                 <?php } ?>
                             </select>
                             <div class="validation-message" data-field="material_id"></div>

@@ -12,19 +12,16 @@ class Pengadaan extends Base_Controller
      * @return 	view
      */
 
-    // public function __construct()
-    // {
-    //     parent::__construct();
-    //     // $this->load->model('Material_model', 'material');
-    //     // $this->load->model('Vendor_model', 'vendor');
-
-    // }
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->model('material_m');
+        $this->load->model('vendor_m');
+    }
 
     public function index()
     {
-        $this->load->model('Material_m', 'material');
         $this->data['title'] = 'Vendor';
-        $this->data['pasokMaterial'] = $this->material->getPasokMaterial()->result_array();
         $this->data['subview'] = 'pengadaan/main';
         $this->load->view('components/main', $this->data);
     }
@@ -39,6 +36,8 @@ class Pengadaan extends Base_Controller
 
     public function form()
     {
+        $data['vendor'] = $this->vendor_m->all();
+        $data['material'] = $this->material_m->all();
         $data['index'] = $this->input->post('index');
         $this->load->view('pengadaan/form', $data);
     }
@@ -54,8 +53,8 @@ class Pengadaan extends Base_Controller
     public function data()
     {
         header('Content-Type: application/json');
-        $this->load->model('product_m');
-        echo json_encode($this->product_m->getJson($this->input->post()));
+        $this->load->model('pengadaan_m');
+        echo json_encode($this->pengadaan_m->getJson($this->input->post()));
     }
 
     /**
@@ -138,7 +137,7 @@ class Pengadaan extends Base_Controller
         $data['stock']           = $this->input->post('stock');
         $data['images']           = $this->input->post('images');
         $data['description']       = $this->input->post('description');
-        $this->db->insert('products', $data);
+        $this->db->insert('tbl_pasok', $data);
 
         header('Content-Type: application/json');
         echo json_encode('success');
@@ -160,7 +159,7 @@ class Pengadaan extends Base_Controller
         $data['images']           = $this->input->post('images');
         $data['description']       = $this->input->post('description');
         $this->db->where('id', $this->input->post('id'));
-        $this->db->update('products', $data);
+        $this->db->update('tbl_pasok', $data);
 
         header('Content-Type: application/json');
         echo json_encode('success');
@@ -177,7 +176,7 @@ class Pengadaan extends Base_Controller
     public function delete()
     {
         $this->db->where('id', $this->input->post('id'));
-        $this->db->delete('products');
+        $this->db->delete('tbl_pasok');
     }
 
     function getProject($id = null)
