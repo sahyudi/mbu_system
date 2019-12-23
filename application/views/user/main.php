@@ -99,7 +99,7 @@
 		]
 	})
 
-	datagrid.run()
+	datagrid.run();
 
 	function menu(rowData, rowIndex) {
 		var menu = '<a href="javascript:;" onclick="main_routes(\'update\', ' + rowIndex + ')"><i class="fa fa-pencil-alt"></i> Edit</a> ' +

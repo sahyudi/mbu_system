@@ -1,6 +1,7 @@
 <?php
 
-class Group_m extends CI_Model {   
+class Group_m extends CI_Model
+{
 
     function __construct()
     {
@@ -18,8 +19,8 @@ class Group_m extends CI_Model {
 
     public function all()
     {
-    	$groups = $this->db->get('groups')->result();
-		return $groups;
+        $groups = $this->db->get('groups')->result();
+        return $groups;
     }
 
     /**
@@ -33,9 +34,9 @@ class Group_m extends CI_Model {
     public function get_group($id)
     {
         $query = $this->db->from('groups g')
-                        ->select('g.*')
-                        ->where('g.id', $id)
-                        ->get();
+            ->select('g.*')
+            ->where('g.id', $id)
+            ->get();
 
         return $query->row();
     }
@@ -64,11 +65,10 @@ class Group_m extends CI_Model {
             'replace_field' => $replace_field
         ];
 
-        $data = $this->datagrid->query($param, function($data) use ($input) {
+        $data = $this->datagrid->query($param, function ($data) use ($input) {
             return $data;
         });
 
         return $data;
     }
-
 }

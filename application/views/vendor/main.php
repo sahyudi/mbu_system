@@ -18,51 +18,24 @@
                                 <div class="col-md-6">
                                     <button class="btn btn-primary" onclick="main_routes('create', '')"><i class="fa fa-pencil-alt"></i> Add New Vendor</button>
                                 </div>
-                                <!-- <div class="col-md-6 form-inline justify-content-end">
+                                <div class="col-md-6 form-inline justify-content-end">
                                     <select class="form-control mb-1 mr-sm-1 mb-sm-0" id="search-option"></select>
                                     <input class="form-control" id="search" placeholder="Search" type="text">
-                                </div> -->
+                                </div>
                             </div>
                         </div>
                         <div class="table-responsive">
-                            <table class="table table-striped table-bordered" id="datagrid">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">No</th>
-                                        <th scope="col">Kode</th>
-                                        <th scope="col">Nama</th>
-                                        <th scope="col">No HP</th>
-                                        <th scope="col">Alamat</th>
-                                        <th scope="col">Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php $no = 1; ?>
-                                    <?php foreach ($vendor as $ven) { ?>
-                                        <tr>
-                                            <td class="text-center"><?= $no++ ?></td>
-                                            <td><?= $ven['kode'] ?></td>
-                                            <td><?= $ven['nama'] ?></td>
-                                            <td><?= $ven['no_hp'] ?></td>
-                                            <td><?= $ven['alamat'] ?></td>
-                                            <td>
-                                                <a href="#" class="btn-edit" data-toggle="modal" data-target="#modal-vendor" data-id="<?= $ven['id'] ?>"><i class="fa fa-pencil-alt"></i> Edit</a>
-                                                <a href="javascript:;" onclick="delete_action(<?= $ven['id'] ?>)"><i class="fa fa-trash-alt"></i> Delete</a>
-                                            </td>
-                                        </tr>
-                                    <?php } ?>
-                                </tbody>
-                            </table>
+                            <table class="table table-striped table-bordered" id="datagrid"></table>
                         </div>
                         <div class="content-box-footer">
                             <div class="row">
-                                <!-- <div class="col-md-3 form-inline">
+                                <div class="col-md-3 form-inline">
                                     <select class="form-control" id="option"></select>
                                 </div>
                                 <div class="col-md-3 form-inline" id="info"></div>
                                 <div class="col-md-6">
                                     <ul class="pagination pull-right" id="paging"></ul>
-                                </div> -->
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -76,63 +49,73 @@
 <section class="form-panel"></section>
 
 <script type="text/javascript">
-    // var datagrid = $("#datagrid").datagrid({
-    //     url: "<?php echo base_url() . 'product/data'; ?>",
-    //     primaryField: 'id',
-    //     rowNumber: true,
-    //     searchInputElement: '#search',
-    //     searchFieldElement: '#search-option',
-    //     pagingElement: '#paging',
-    //     optionPagingElement: '#option',
-    //     pageInfoElement: '#info',
-    //     columns: [{
-    //             field: 'product_name',
-    //             title: 'Product Name',
-    //             editable: true,
-    //             sortable: true,
-    //             width: 450,
-    //             align: 'left',
-    //             search: true
-    //         },
-    //         {
-    //             field: 'price_formatted',
-    //             title: 'Price',
-    //             sortable: false,
-    //             width: 100,
-    //             align: 'center',
-    //             search: false,
-    //             rowStyler: function(rowData, rowIndex) {
-    //                 return '<span class="badge badge-yellow">$' + rowData.price + '</span>';
-    //             }
-    //         },
-    //         {
-    //             field: 'stock',
-    //             title: 'Stock',
-    //             editable: true,
-    //             sortable: true,
-    //             width: 100,
-    //             align: 'center',
-    //             search: true
-    //         },
-    //         {
-    //             field: 'menu',
-    //             title: 'Menu',
-    //             sortable: false,
-    //             width: 200,
-    //             align: 'center',
-    //             search: false,
-    //             rowStyler: function(rowData, rowIndex) {
-    //                 return menu(rowData, rowIndex);
-    //             }
-    //         }
-    //     ]
-    // });
+    var datagrid = $("#datagrid").datagrid({
+        url: "<?php echo base_url() . 'vendor/data'; ?>",
+        primaryField: 'id',
+        rowNumber: true,
+        searchInputElement: '#search',
+        searchFieldElement: '#search-option',
+        pagingElement: '#paging',
+        optionPagingElement: '#option',
+        pageInfoElement: '#info',
+        columns: [{
+                field: 'kode',
+                title: 'Kode',
+                editable: true,
+                sortable: true,
+                width: 100,
+                align: 'left',
+                search: true
+            },
+            {
+                field: 'nama',
+                title: 'Nama',
+                sortable: false,
+                width: 200,
+                align: 'center',
+                search: false,
+                // search: false,
+                // rowStyler: function(rowData, rowIndex) {
+                //     return '<span class="badge badge-yellow">$' + rowData.price + '</span>';
+                // }
+            },
+            {
+                field: 'no_hp',
+                title: 'NO HP',
+                editable: true,
+                sortable: true,
+                width: 100,
+                align: 'center',
+                search: true
+            },
+            {
+                field: 'alamat',
+                title: 'Alamat',
+                editable: true,
+                sortable: true,
+                width: 350,
+                align: 'center',
+                search: true
+            },
+            {
+                field: 'menu',
+                title: 'Menu',
+                sortable: false,
+                width: 200,
+                align: 'center',
+                search: false,
+                rowStyler: function(rowData, rowIndex) {
+                    return menu(rowData, rowIndex);
+                }
+            }
+        ]
+    });
 
-    // datagrid.run();
+    datagrid.run();
 
     function menu(rowData, rowIndex) {
-        var menu = '<a href="javascript:;" onclick="main_routes(\'update\', ' + rowIndex + ')"><i class="fa fa-pencil"></i> Edit</a> ' +
-            '<a href="javascript:;" onclick="delete_action(' + rowIndex + ')"><i class="fa fa-trash-o"></i> Delete</a>'
+        var menu = '<a href="javascript:;" onclick="main_routes(\'update\', ' + rowIndex + ')"><i class="fa fa-pencil-alt"></i> Edit</a> ' +
+            '<a href="javascript:;" onclick="delete_action(' + rowIndex + ')"><i class="fa fa-trash-alt"></i> Delete</a>'
         return menu;
     }
 
@@ -156,7 +139,7 @@
             closeOnConfirm: true
         }, function() {
             var row = datagrid.getRowData(rowIndex);
-            $.post("<?php echo base_url() . 'project/delete'; ?>", {
+            $.post("<?php echo base_url() . 'vendor/delete'; ?>", {
                 id: row.id
             }).done(function(data) {
                 datagrid.reload();

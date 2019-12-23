@@ -66,7 +66,10 @@
 		$('#form-action').disable([".action"]);
 		$("button[title='save']").html("Validating data, please wait...");
 		$.ajax({
-			url: "<?php echo base_url() . 'user/validate'; ?>", async: false, type: 'POST', data: formData,
+			url: "<?php echo base_url() . 'user/validate'; ?>", 
+			async: false, 
+			type: 'POST', 
+			data: formData,
 			success: function(data, textStatus, jqXHR) {
 				returnData = data;
 			}

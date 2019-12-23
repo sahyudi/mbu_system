@@ -63,7 +63,7 @@
         $('#form-action').disable([".action"]);
         $("button[title='save']").html("Validating data, please wait...");
         $.ajax({
-            url: "<?php echo base_url() . 'user/validate'; ?>",
+            url: "<?php echo base_url() . 'vendor/validate'; ?>",
             async: false,
             type: 'POST',
             data: formData,
@@ -92,7 +92,7 @@
 
     function save(formData) {
         $("button[title='save']").html("Saving data, please wait...");
-        $.post("<?php echo base_url() . 'user/action'; ?>", formData).done(function(data) {
+        $.post("<?php echo base_url() . 'vendor/action'; ?>", formData).done(function(data) {
             $('.datagrid-panel').fadeIn();
             $('.form-panel').fadeOut();
             datagrid.reload();

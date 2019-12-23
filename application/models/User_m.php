@@ -1,6 +1,7 @@
 <?php
 
-class User_m extends CI_Model {
+class User_m extends CI_Model
+{
 
 	function __construct()
 	{
@@ -9,51 +10,51 @@ class User_m extends CI_Model {
 	}
 
 	/**
-     * Check User Credentials
-     *
-     * @access 	public
-     * @param 	
-     * @return 	json(array)
-     */
-	
+	 * Check User Credentials
+	 *
+	 * @access 	public
+	 * @param 	
+	 * @return 	json(array)
+	 */
+
 	public function attempt($input)
 	{
 		$query = $this->db->from('users u')
-						->select('u.*, g.group_name')
-						->where('email', $input['email'])
-						->where('password', $input['password'])
-						->join('groups as g', 'g.id = u.id', 'left')
-						->get();
+			->select('u.*, g.group_name')
+			->where('email', $input['email'])
+			->where('password', $input['password'])
+			->join('groups as g', 'g.id = u.id', 'left')
+			->get();
 
 		return $query->row();
 	}
 
 	/**
-     * Get User by ID
-     *
-     * @access 	public
-     * @param 	
-     * @return 	json(array)
-     */
+	 * Get User by ID
+	 *
+	 * @access 	public
+	 * @param 	
+	 * @return 	json(array)
+	 */
 
 	public function get_user($id)
 	{
 		$query = $this->db->from('users u')
-						->select('u.*, g.group_name')
-						->where('u.id', $id)
-						->join('groups as g', 'g.id = u.id', 'left')
-						->get();
+			->select('u.*, g.group_name')
+			->where('u.id', $id)
+			->join('groups as g', 'g.id = u.id', 'left')
+			->get();
 
 		return $query->row();
 	}
 
 	/**
-     * Datagrid Data
-     *
-     * @access 	public
-     * @param 	
-     * @return 	json(array)
-     */
+	 * Datagrid Data
+	 *
+	 * @access 	public
+	 * @param 	
+	 * @return 	json(array)
+	 */
 
 	public function getJson($input)
 	{
@@ -72,12 +73,11 @@ class User_m extends CI_Model {
 			'replace_field' => $replace_field
 		];
 
-		$data = $this->datagrid->query($param, function($data) use ($input) {
+		$data = $this->datagrid->query($param, function ($data) use ($input) {
 			return $data->join('groups as g', 'g.id = a.group_id', 'left')
-						->where('a.id !=', $this->session->userdata('active_user')->id);
+				->where('a.id !=', $this->session->userdata('active_user')->id);
 		});
 
 		return $data;
 	}
-
 }

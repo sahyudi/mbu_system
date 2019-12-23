@@ -54,8 +54,8 @@ class Vendor extends Base_Controller
     public function data()
     {
         header('Content-Type: application/json');
-        $this->load->model('product_m');
-        echo json_encode($this->product_m->getJson($this->input->post()));
+        $this->load->model('vendor_m');
+        echo json_encode($this->vendor_m->getJson($this->input->post()));
     }
 
     /**
@@ -70,28 +70,23 @@ class Vendor extends Base_Controller
     {
         $rules = [
             [
-                'field' => 'product_name',
-                'label' => 'Product Name',
+                'field' => 'kode',
+                'label' => 'Kode',
                 'rules' => 'required'
             ],
             [
-                'field' => 'price',
-                'label' => 'Price',
+                'field' => 'nama',
+                'label' => 'Nama',
                 'rules' => 'required'
             ],
             [
-                'field' => 'stock',
-                'label' => 'Stock',
+                'field' => 'alamat',
+                'label' => 'Alamat',
                 'rules' => 'required'
             ],
             [
-                'field' => 'images',
-                'label' => 'Images',
-                'rules' => 'required'
-            ],
-            [
-                'field' => 'description',
-                'label' => 'Description',
+                'field' => 'no_hp',
+                'label' => 'NO HP',
                 'rules' => 'required'
             ]
         ];
@@ -133,12 +128,11 @@ class Vendor extends Base_Controller
 
     public function create()
     {
-        $data['product_name']     = $this->input->post('product_name');
-        $data['price']           = $this->input->post('price');
-        $data['stock']           = $this->input->post('stock');
-        $data['images']           = $this->input->post('images');
-        $data['description']       = $this->input->post('description');
-        $this->db->insert('products', $data);
+        $data['kode']     = $this->input->post('kode');
+        $data['nama']     = $this->input->post('nama');
+        $data['no_hp']    = $this->input->post('no_hp');
+        $data['alamat']   = $this->input->post('alamat');
+        $this->db->insert('tbl_vendor', $data);
 
         header('Content-Type: application/json');
         echo json_encode('success');
@@ -154,13 +148,12 @@ class Vendor extends Base_Controller
 
     public function update()
     {
-        $data['product_name']     = $this->input->post('product_name');
-        $data['price']           = $this->input->post('price');
-        $data['stock']           = $this->input->post('stock');
-        $data['images']           = $this->input->post('images');
-        $data['description']       = $this->input->post('description');
+        $data['kode']     = $this->input->post('kode');
+        $data['nama']     = $this->input->post('nama');
+        $data['no_hp']    = $this->input->post('no_hp');
+        $data['alamat']   = $this->input->post('alamat');
         $this->db->where('id', $this->input->post('id'));
-        $this->db->update('products', $data);
+        $this->db->update('tbl_vendor', $data);
 
         header('Content-Type: application/json');
         echo json_encode('success');
@@ -177,7 +170,7 @@ class Vendor extends Base_Controller
     public function delete()
     {
         $this->db->where('id', $this->input->post('id'));
-        $this->db->delete('products');
+        $this->db->delete('tbl_vendor');
     }
 
     function getProject($id = null)
