@@ -5,26 +5,16 @@ class Employee extends Base_Controller
 {
 
     /**
-     * List of Products
+     * List of tbl_employee
      *
      * @access 	public
      * @param 	
      * @return 	view
      */
 
-    // public function __construct()
-    // {
-    //     parent::__construct();
-    //     // $this->load->model('Material_model', 'material');
-    //     // $this->load->model('Vendor_model', 'vendor');
-
-    // }
-
     public function index()
     {
-        $this->load->model('Project_m', 'project');
-        $this->data['title'] = 'Vendor';
-        $this->data['employee'] = $this->db->get('tbl_employee')->result_array();
+        $this->data['title'] = 'Employee';
         $this->data['subview'] = 'employee/main';
         $this->load->view('components/main', $this->data);
     }
@@ -54,8 +44,8 @@ class Employee extends Base_Controller
     public function data()
     {
         header('Content-Type: application/json');
-        $this->load->model('product_m');
-        echo json_encode($this->product_m->getJson($this->input->post()));
+        $this->load->model('employee_m');
+        echo json_encode($this->employee_m->getJson($this->input->post()));
     }
 
     /**
@@ -70,28 +60,18 @@ class Employee extends Base_Controller
     {
         $rules = [
             [
-                'field' => 'product_name',
-                'label' => 'Product Name',
+                'field' => 'nama',
+                'label' => 'Nama',
                 'rules' => 'required'
             ],
             [
-                'field' => 'price',
-                'label' => 'Price',
+                'field' => 'no_hp',
+                'label' => 'NO HP',
                 'rules' => 'required'
             ],
             [
-                'field' => 'stock',
-                'label' => 'Stock',
-                'rules' => 'required'
-            ],
-            [
-                'field' => 'images',
-                'label' => 'Images',
-                'rules' => 'required'
-            ],
-            [
-                'field' => 'description',
-                'label' => 'Description',
+                'field' => 'alamat',
+                'label' => 'Alamat',
                 'rules' => 'required'
             ]
         ];
@@ -133,12 +113,10 @@ class Employee extends Base_Controller
 
     public function create()
     {
-        $data['product_name']     = $this->input->post('product_name');
-        $data['price']           = $this->input->post('price');
-        $data['stock']           = $this->input->post('stock');
-        $data['images']           = $this->input->post('images');
-        $data['description']       = $this->input->post('description');
-        $this->db->insert('products', $data);
+        $data['nama']     = $this->input->post('nama');
+        $data['no_hp']    = $this->input->post('no_hp');
+        $data['alamat']   = $this->input->post('alamat');
+        $this->db->insert('tbl_employee', $data);
 
         header('Content-Type: application/json');
         echo json_encode('success');
@@ -154,13 +132,11 @@ class Employee extends Base_Controller
 
     public function update()
     {
-        $data['product_name']     = $this->input->post('product_name');
-        $data['price']           = $this->input->post('price');
-        $data['stock']           = $this->input->post('stock');
-        $data['images']           = $this->input->post('images');
-        $data['description']       = $this->input->post('description');
+        $data['nama']     = $this->input->post('nama');
+        $data['no_hp']    = $this->input->post('no_hp');
+        $data['alamat']   = $this->input->post('alamat');
         $this->db->where('id', $this->input->post('id'));
-        $this->db->update('products', $data);
+        $this->db->update('tbl_employee', $data);
 
         header('Content-Type: application/json');
         echo json_encode('success');
@@ -177,7 +153,7 @@ class Employee extends Base_Controller
     public function delete()
     {
         $this->db->where('id', $this->input->post('id'));
-        $this->db->delete('products');
+        $this->db->delete('tbl_employee');
     }
 
     function getProject($id = null)

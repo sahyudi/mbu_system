@@ -16,12 +16,12 @@
                         <input type="text" name="id" class="hidden">
                         <div class="form-group">
                             <label for="email">Nama </label>
-                            <input id="no_pembelian" type="text" class="form-control" name="nama">
+                            <input id="nama" type="text" class="form-control" name="nama">
                             <div class="validation-message" data-field="nama"></div>
                         </div>
                         <div class="form-group">
                             <label for="email">Deskripsi</label>
-                            <input id="no_pembelian" type="text" class="form-control" name="deskripsi">
+                            <input id="deskripsi" type="text" class="form-control" name="deskripsi">
                             <div class="validation-message" data-field="deskripsi"></div>
                         </div>
                     </form>
@@ -40,25 +40,8 @@
     var onLoad = (function() {
         var index = "<?php echo $index; ?>";
 
-        var uploader = $('.picker-uploader').uploader({
-            upload_url: '<?php echo base_url() . 'uploader/upload'; ?>',
-            file_picker_url: '<?php echo base_url() . 'uploader/files'; ?>',
-            input_name: 'images',
-            maximum_total_files: 4,
-            maximum_file_size: 50009000,
-            file_types_allowed: ['image/jpeg', 'image/png', 'image/vnd.adobe.photoshop'],
-            on_error: function(err) {
-                swal({
-                    title: "Upload Failed",
-                    text: err.messages,
-                    type: "warning"
-                })
-            }
-        })
-
         if (index != '') {
             datagrid.formLoad('#form-action', index);
-            uploader.set_files(datagrid.getRowData(index).images)
         }
 
         $('.loading-panel').hide();
@@ -70,7 +53,7 @@
         $('#form-action').disable([".action"]);
         $("button[title='save']").html("Validating data, please wait...");
         $.ajax({
-            url: "<?php echo base_url() . 'product/validate'; ?>",
+            url: "<?php echo base_url() . 'laboratorium/validate'; ?>",
             async: false,
             type: 'POST',
             data: formData,
@@ -99,7 +82,7 @@
 
     function save(formData) {
         $("button[title='save']").html("Saving data, please wait...");
-        $.post("<?php echo base_url() . 'product/action'; ?>", formData).done(function(data) {
+        $.post("<?php echo base_url() . 'laboratorium/action'; ?>", formData).done(function(data) {
             $('.datagrid-panel').fadeIn();
             $('.form-panel').fadeOut();
             datagrid.reload();

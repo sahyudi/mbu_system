@@ -21,7 +21,7 @@
                         </div>
                         <div class="form-group">
                             <label for="email">No Hp</label>
-                            <input id="no_hp" type="number" class="form-control" name="no_hp">
+                            <input id="no_hp" type="text" class="form-control" name="no_hp">
                             <div class="validation-message" data-field="no_hp"></div>
                         </div>
                         <div class="form-group">
@@ -45,25 +45,8 @@
     var onLoad = (function() {
         var index = "<?php echo $index; ?>";
 
-        var uploader = $('.picker-uploader').uploader({
-            upload_url: '<?php echo base_url() . 'uploader/upload'; ?>',
-            file_picker_url: '<?php echo base_url() . 'uploader/files'; ?>',
-            input_name: 'images',
-            maximum_total_files: 4,
-            maximum_file_size: 50009000,
-            file_types_allowed: ['image/jpeg', 'image/png', 'image/vnd.adobe.photoshop'],
-            on_error: function(err) {
-                swal({
-                    title: "Upload Failed",
-                    text: err.messages,
-                    type: "warning"
-                })
-            }
-        })
-
         if (index != '') {
             datagrid.formLoad('#form-action', index);
-            uploader.set_files(datagrid.getRowData(index).images)
         }
 
         $('.loading-panel').hide();
@@ -75,7 +58,7 @@
         $('#form-action').disable([".action"]);
         $("button[title='save']").html("Validating data, please wait...");
         $.ajax({
-            url: "<?php echo base_url() . 'product/validate'; ?>",
+            url: "<?php echo base_url() . 'employee/validate'; ?>",
             async: false,
             type: 'POST',
             data: formData,
@@ -104,7 +87,7 @@
 
     function save(formData) {
         $("button[title='save']").html("Saving data, please wait...");
-        $.post("<?php echo base_url() . 'product/action'; ?>", formData).done(function(data) {
+        $.post("<?php echo base_url() . 'employee/action'; ?>", formData).done(function(data) {
             $('.datagrid-panel').fadeIn();
             $('.form-panel').fadeOut();
             datagrid.reload();

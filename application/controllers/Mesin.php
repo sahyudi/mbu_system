@@ -22,9 +22,7 @@ class Mesin extends Base_Controller
 
     public function index()
     {
-        $this->load->model('Project_m', 'project');
-        $this->data['title'] = 'Vendor';
-        $this->data['mesin'] = $this->db->get('tbl_mesin')->result_array();
+        $this->data['title'] = 'Mesin';
         $this->data['subview'] = 'mesin/main';
         $this->load->view('components/main', $this->data);
     }
@@ -54,8 +52,8 @@ class Mesin extends Base_Controller
     public function data()
     {
         header('Content-Type: application/json');
-        $this->load->model('product_m');
-        echo json_encode($this->product_m->getJson($this->input->post()));
+        $this->load->model('mesin_m');
+        echo json_encode($this->mesin_m->getJson($this->input->post()));
     }
 
     /**
@@ -70,28 +68,13 @@ class Mesin extends Base_Controller
     {
         $rules = [
             [
-                'field' => 'product_name',
-                'label' => 'Product Name',
+                'field' => 'deskripsi',
+                'label' => 'Deskripsi',
                 'rules' => 'required'
             ],
             [
-                'field' => 'price',
-                'label' => 'Price',
-                'rules' => 'required'
-            ],
-            [
-                'field' => 'stock',
-                'label' => 'Stock',
-                'rules' => 'required'
-            ],
-            [
-                'field' => 'images',
-                'label' => 'Images',
-                'rules' => 'required'
-            ],
-            [
-                'field' => 'description',
-                'label' => 'Description',
+                'field' => 'nama',
+                'label' => 'Nama',
                 'rules' => 'required'
             ]
         ];
@@ -133,12 +116,9 @@ class Mesin extends Base_Controller
 
     public function create()
     {
-        $data['product_name']     = $this->input->post('product_name');
-        $data['price']           = $this->input->post('price');
-        $data['stock']           = $this->input->post('stock');
-        $data['images']           = $this->input->post('images');
-        $data['description']       = $this->input->post('description');
-        $this->db->insert('products', $data);
+        $data['nama']       = $this->input->post('nama');
+        $data['deskripsi']  = $this->input->post('deskripsi');
+        $this->db->insert('tbl_mesin', $data);
 
         header('Content-Type: application/json');
         echo json_encode('success');
@@ -154,13 +134,10 @@ class Mesin extends Base_Controller
 
     public function update()
     {
-        $data['product_name']     = $this->input->post('product_name');
-        $data['price']           = $this->input->post('price');
-        $data['stock']           = $this->input->post('stock');
-        $data['images']           = $this->input->post('images');
-        $data['description']       = $this->input->post('description');
+        $data['nama']       = $this->input->post('nama');
+        $data['deskripsi']  = $this->input->post('deskripsi');
         $this->db->where('id', $this->input->post('id'));
-        $this->db->update('products', $data);
+        $this->db->update('tbl_mesin', $data);
 
         header('Content-Type: application/json');
         echo json_encode('success');
@@ -177,7 +154,7 @@ class Mesin extends Base_Controller
     public function delete()
     {
         $this->db->where('id', $this->input->post('id'));
-        $this->db->delete('products');
+        $this->db->delete('tbl_mesin');
     }
 
     function getProject($id = null)
