@@ -2,15 +2,15 @@
 Navicat MySQL Data Transfer
 
 Source Server         : localhost
-Source Server Version : 50626
+Source Server Version : 50621
 Source Host           : localhost:3306
 Source Database       : db_mcbu
 
 Target Server Type    : MYSQL
-Target Server Version : 50626
+Target Server Version : 50621
 File Encoding         : 65001
 
-Date: 2019-12-24 06:07:32
+Date: 2019-12-24 08:08:38
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -151,24 +151,11 @@ CREATE TABLE `privileges` (
   KEY `menu_id` (`menu_id`),
   CONSTRAINT `privileges_ibfk_1` FOREIGN KEY (`group_id`) REFERENCES `groups` (`id`) ON UPDATE CASCADE,
   CONSTRAINT `privileges_ibfk_2` FOREIGN KEY (`menu_id`) REFERENCES `menus` (`id`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=3109 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3138 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of privileges
 -- ----------------------------
-INSERT INTO privileges VALUES ('3059', '2', '5');
-INSERT INTO privileges VALUES ('3060', '2', '6');
-INSERT INTO privileges VALUES ('3061', '2', '7');
-INSERT INTO privileges VALUES ('3062', '2', '8');
-INSERT INTO privileges VALUES ('3063', '2', '9');
-INSERT INTO privileges VALUES ('3064', '2', '10');
-INSERT INTO privileges VALUES ('3065', '2', '12');
-INSERT INTO privileges VALUES ('3066', '2', '13');
-INSERT INTO privileges VALUES ('3067', '2', '14');
-INSERT INTO privileges VALUES ('3068', '2', '15');
-INSERT INTO privileges VALUES ('3069', '2', '16');
-INSERT INTO privileges VALUES ('3070', '2', '59');
-INSERT INTO privileges VALUES ('3071', '2', '60');
 INSERT INTO privileges VALUES ('3090', '1', '1');
 INSERT INTO privileges VALUES ('3091', '1', '2');
 INSERT INTO privileges VALUES ('3092', '1', '3');
@@ -188,6 +175,21 @@ INSERT INTO privileges VALUES ('3105', '1', '17');
 INSERT INTO privileges VALUES ('3106', '1', '18');
 INSERT INTO privileges VALUES ('3107', '1', '59');
 INSERT INTO privileges VALUES ('3108', '1', '60');
+INSERT INTO privileges VALUES ('3123', '2', '5');
+INSERT INTO privileges VALUES ('3124', '2', '6');
+INSERT INTO privileges VALUES ('3125', '2', '7');
+INSERT INTO privileges VALUES ('3126', '2', '8');
+INSERT INTO privileges VALUES ('3127', '2', '9');
+INSERT INTO privileges VALUES ('3128', '2', '10');
+INSERT INTO privileges VALUES ('3129', '2', '12');
+INSERT INTO privileges VALUES ('3130', '2', '13');
+INSERT INTO privileges VALUES ('3131', '2', '14');
+INSERT INTO privileges VALUES ('3132', '2', '15');
+INSERT INTO privileges VALUES ('3133', '2', '16');
+INSERT INTO privileges VALUES ('3134', '2', '17');
+INSERT INTO privileges VALUES ('3135', '2', '18');
+INSERT INTO privileges VALUES ('3136', '2', '59');
+INSERT INTO privileges VALUES ('3137', '2', '60');
 
 -- ----------------------------
 -- Table structure for `products`
@@ -210,7 +212,7 @@ CREATE TABLE `products` (
 -- ----------------------------
 INSERT INTO products VALUES ('1', 'Microsoft Lumia 950 XL Dual SIM', '220', '24', '[{\"file_name\":\"nokia-lumia-930-new.27-05-2017_00-15-27.jpg\",\"file_size\":7518,\"file_type\":\"image/jpeg\",\"file_thumbnail\":\"http://localhost/pongo_web/public/product_images/nokia-lumia-930-new.27-05-2017_00-15-27.jpg\"},{\"file_name\":\"microsoft-lumia-950-1.27-05-2017_00-15-27.jpg\",\"file_size\":7217,\"file_type\":\"image/jpeg\",\"file_thumbnail\":\"http://localhost/pongo_web/public/product_images/microsoft-lumia-950-1.27-05-2017_00-15-27.jpg\"},{\"file_name\":\"microsoft-lumia-540-ds1.27-05-2017_00-15-27.jpg\",\"file_size\":7649,\"file_type\":\"image/jpeg\",\"file_thumbnail\":\"http://localhost/pongo_web/public/product_images/microsoft-lumia-540-ds1.27-05-2017_00-15-27.jpg\"}]', '-', '2017-05-27 00:22:00', '2017-05-27 00:22:00');
 INSERT INTO products VALUES ('2', 'Samsung B130', '221', '50', '[{\"file_name\":\"nokia-lumia-930-new.27-05-2017_00-15-27.jpg\",\"file_size\":7518,\"file_type\":\"image/jpeg\",\"file_thumbnail\":\"http://localhost/pongo_web/public/product_images/nokia-lumia-930-new.27-05-2017_00-15-27.jpg\"},{\"file_name\":\"microsoft-lumia-950-1.27-05-2017_00-15-27.jpg\",\"file_size\":7217,\"file_type\":\"image/jpeg\",\"file_thumbnail\":\"http://localhost/pongo_web/public/product_images/microsoft-lumia-950-1.27-05-2017_00-15-27.jpg\"},{\"file_name\":\"microsoft-lumia-540-ds1.27-05-2017_00-15-27.jpg\",\"file_size\":7649,\"file_type\":\"image/jpeg\",\"file_thumbnail\":\"http://localhost/pongo_web/public/product_images/microsoft-lumia-540-ds1.27-05-2017_00-15-27.jpg\"}]', '-', '2017-05-27 00:24:02', '2017-05-27 00:24:02');
-INSERT INTO products VALUES ('3', 'Samsung M260 Factor', '232', '89', '[{\"file_name\":\"nokia-lumia-930-new.27-05-2017_00-15-27.jpg\",\"file_size\":7518,\"file_type\":\"image/jpeg\",\"file_thumbnail\":\"http://localhost/pongo_web/public/product_images/nokia-lumia-930-new.27-05-2017_00-15-27.jpg\"},{\"file_name\":\"microsoft-lumia-950-1.27-05-2017_00-15-27.jpg\",\"file_size\":7217,\"file_type\":\"image/jpeg\",\"file_thumbnail\":\"http://localhost/pongo_web/public/product_images/microsoft-lumia-950-1.27-05-2017_00-15-27.jpg\"},{\"file_name\":\"microsoft-lumia-540-ds1.27-05-2017_00-15-27.jpg\",\"file_size\":7649,\"file_type\":\"image/jpeg\",\"file_thumbnail\":\"http://localhost/pongo_web/public/product_images/microsoft-lumia-540-ds1.27-05-2017_00-15-27.jpg\"}]', '-', '2017-05-27 00:24:02', '2017-05-27 00:24:02');
+INSERT INTO products VALUES ('4', 'Samsung Galaxy S Duos S7562', '243', '59', '[{\"file_name\":\"nokia-lumia-930-new.27-05-2017_00-15-27.jpg\",\"file_size\":7518,\"file_type\":\"image/jpeg\",\"file_thumbnail\":\"http://localhost/pongo_web/public/product_images/nokia-lumia-930-new.27-05-2017_00-15-27.jpg\"},{\"file_name\":\"microsoft-lumia-950-1.27-05-2017_00-15-27.jpg\",\"file_size\":7217,\"file_type\":\"image/jpeg\",\"file_thumbnail\":\"http://localhost/pongo_web/public/product_images/microsoft-lumia-950-1.27-05-2017_00-15-27.jpg\"},{\"file_name\":\"microsoft-lumia-540-ds1.27-05-2017_00-15-27.jpg\",\"file_size\":7649,\"file_type\":\"image/jpeg\",\"file_thumbnail\":\"http://localhost/pongo_web/public/product_images/microsoft-lumia-540-ds1.27-05-2017_00-15-27.jpg\"}]', '-', '2017-05-27 00:24:03', '2017-05-27 00:24:03');
 INSERT INTO products VALUES ('5', 'Samsung Galaxy J2', '212', '35', '[{\"file_name\":\"nokia-lumia-930-new.27-05-2017_00-15-27.jpg\",\"file_size\":7518,\"file_type\":\"image/jpeg\",\"file_thumbnail\":\"http://localhost/pongo_web/public/product_images/nokia-lumia-930-new.27-05-2017_00-15-27.jpg\"},{\"file_name\":\"microsoft-lumia-950-1.27-05-2017_00-15-27.jpg\",\"file_size\":7217,\"file_type\":\"image/jpeg\",\"file_thumbnail\":\"http://localhost/pongo_web/public/product_images/microsoft-lumia-950-1.27-05-2017_00-15-27.jpg\"},{\"file_name\":\"microsoft-lumia-540-ds1.27-05-2017_00-15-27.jpg\",\"file_size\":7649,\"file_type\":\"image/jpeg\",\"file_thumbnail\":\"http://localhost/pongo_web/public/product_images/microsoft-lumia-540-ds1.27-05-2017_00-15-27.jpg\"}]', '-', '2017-05-27 00:24:03', '2017-05-27 00:24:03');
 INSERT INTO products VALUES ('6', 'Samsung Galaxy S Duos 2 S7582', '245', '82', '[{\"file_name\":\"nokia-lumia-930-new.27-05-2017_00-15-27.jpg\",\"file_size\":7518,\"file_type\":\"image/jpeg\",\"file_thumbnail\":\"http://localhost/pongo_web/public/product_images/nokia-lumia-930-new.27-05-2017_00-15-27.jpg\"},{\"file_name\":\"microsoft-lumia-950-1.27-05-2017_00-15-27.jpg\",\"file_size\":7217,\"file_type\":\"image/jpeg\",\"file_thumbnail\":\"http://localhost/pongo_web/public/product_images/microsoft-lumia-950-1.27-05-2017_00-15-27.jpg\"},{\"file_name\":\"microsoft-lumia-540-ds1.27-05-2017_00-15-27.jpg\",\"file_size\":7649,\"file_type\":\"image/jpeg\",\"file_thumbnail\":\"http://localhost/pongo_web/public/product_images/microsoft-lumia-540-ds1.27-05-2017_00-15-27.jpg\"}]', '-', '2017-05-27 00:24:03', '2017-05-27 00:24:03');
 INSERT INTO products VALUES ('7', 'Samsung Ativ Odyssey L930', '401', '40', '[{\"file_name\":\"nokia-lumia-930-new.27-05-2017_00-15-27.jpg\",\"file_size\":7518,\"file_type\":\"image/jpeg\",\"file_thumbnail\":\"http://localhost/pongo_web/public/product_images/nokia-lumia-930-new.27-05-2017_00-15-27.jpg\"},{\"file_name\":\"microsoft-lumia-950-1.27-05-2017_00-15-27.jpg\",\"file_size\":7217,\"file_type\":\"image/jpeg\",\"file_thumbnail\":\"http://localhost/pongo_web/public/product_images/microsoft-lumia-950-1.27-05-2017_00-15-27.jpg\"},{\"file_name\":\"microsoft-lumia-540-ds1.27-05-2017_00-15-27.jpg\",\"file_size\":7649,\"file_type\":\"image/jpeg\",\"file_thumbnail\":\"http://localhost/pongo_web/public/product_images/microsoft-lumia-540-ds1.27-05-2017_00-15-27.jpg\"}]', '-', '2017-05-27 00:24:03', '2017-05-27 00:24:03');
@@ -281,8 +283,9 @@ CREATE TABLE `tbl_material` (
 -- ----------------------------
 -- Records of tbl_material
 -- ----------------------------
-INSERT INTO tbl_material VALUES ('2', 'K001', 'Stainless', '10000', 'PCS', '700000', '4 x 4 Meter');
-INSERT INTO tbl_material VALUES ('4', 'K003', 'Besi Baja', '20000', 'KG', '1000000', '6 Meter');
+INSERT INTO tbl_material VALUES ('2', 'K001', 'Stainless', '10000', 'PCS', '100000', '4 x 4 Meter');
+INSERT INTO tbl_material VALUES ('3', 'K002', 'Pasir', '100000', 'Kubik', '100000', '-');
+INSERT INTO tbl_material VALUES ('4', 'K003', 'Besi Baja', '20000', 'KG', '1000000', '-');
 
 -- ----------------------------
 -- Table structure for `tbl_mesin`
@@ -311,14 +314,20 @@ CREATE TABLE `tbl_pasok` (
   `no_pembelian` varchar(12) COLLATE utf8_bin DEFAULT NULL,
   `tgl_beli` varchar(12) COLLATE utf8_bin DEFAULT NULL,
   `qty` varchar(255) COLLATE utf8_bin DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE
+  PRIMARY KEY (`id`) USING BTREE,
+  KEY `tbl_pasok_ibfk_1` (`material_id`),
+  KEY `tbl_pasok_ibfk_2` (`vendor_id`),
+  CONSTRAINT `tbl_pasok_ibfk_1` FOREIGN KEY (`material_id`) REFERENCES `tbl_material` (`id`) ON UPDATE CASCADE,
+  CONSTRAINT `tbl_pasok_ibfk_2` FOREIGN KEY (`vendor_id`) REFERENCES `tbl_vendor` (`id`) ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_bin ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of tbl_pasok
 -- ----------------------------
 INSERT INTO tbl_pasok VALUES ('1', '2', '1', '1574623359', '2019-11-25', '10000');
+INSERT INTO tbl_pasok VALUES ('2', '3', '1', '1575121604', '2019-11-30', '10000');
 INSERT INTO tbl_pasok VALUES ('3', '2', '1', '1576855771', '2019-12-20', '10000');
+INSERT INTO tbl_pasok VALUES ('4', '3', '1', '1576855793', '2019-12-20', '100000');
 INSERT INTO tbl_pasok VALUES ('5', '4', '1', '1576855811', '2019-12-20', '20000');
 
 -- ----------------------------
@@ -382,13 +391,14 @@ CREATE TABLE `tbl_proyek` (
   `tgl_selesai` varchar(62) COLLATE utf8_bin DEFAULT NULL,
   `deskripsi` varchar(255) COLLATE utf8_bin DEFAULT NULL,
   `tgl_input` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `status` int(1) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_bin ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of tbl_proyek
 -- ----------------------------
-INSERT INTO tbl_proyek VALUES ('1', '1575127003', 'Testing aja dulu', '2019-11-30', '2019-12-01', 'Testing aja dulu', '2019-11-30 22:19:58');
+INSERT INTO tbl_proyek VALUES ('1', '1575127003', 'Testing aja dulu', '2019-11-30', '2019-12-01', 'Testing aja dulu', '2019-11-30 22:19:58', null);
 
 -- ----------------------------
 -- Table structure for `tbl_proyek_material`
@@ -419,7 +429,9 @@ CREATE TABLE `tbl_proyek_mesin` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `mesin_id` int(11) NOT NULL,
   `proyek_no` int(11) NOT NULL,
-  PRIMARY KEY (`id`) USING BTREE
+  PRIMARY KEY (`id`) USING BTREE,
+  KEY `tbl_proyek_mesin_ibfk_1` (`mesin_id`),
+  CONSTRAINT `tbl_proyek_mesin_ibfk_1` FOREIGN KEY (`mesin_id`) REFERENCES `tbl_mesin` (`id`) ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
