@@ -41,12 +41,22 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="">Mesin</label>
-                                    <input class="form-control" name="mesin" placeholder="Mesin" type="text">
+                                    <select class="form-control select2" name="mesin" id="mesin">
+                                        <option value=""></option>
+                                        <?php foreach ($mesin as $key) { ?>
+                                            <option value="<?= $key['id'] ?>"><?= $key['nama'] ?></option>
+                                        <?php } ?>
+                                    </select>
                                     <div class="validation-message" data-field="mesin"></div>
                                 </div>
                                 <div class="form-group">
                                     <label for="">Ruangan</label>
-                                    <input class="form-control" name="ruangan" placeholder="Ruangan" type="text">
+                                    <select class="form-control select2" name="ruangan" id="ruangan">
+                                        <option value=""></option>
+                                        <?php foreach ($ruangan as $key) { ?>
+                                            <option value="<?= $key['id'] ?>"><?= $key['nama'] ?></option>
+                                        <?php } ?>
+                                    </select>
                                     <div class="validation-message" data-field="ruangan"></div>
                                 </div>
                             </div>
@@ -109,24 +119,7 @@
 
 <script type="text/javascript">
     var onLoad = (function() {
-        var index = "";
-
-        var uploader = $('.picker-uploader').uploader({
-            upload_url: '<?php echo base_url() . 'uploader/upload'; ?>',
-            file_picker_url: '<?php echo base_url() . 'uploader/files'; ?>',
-            input_name: 'images',
-            maximum_total_files: 4,
-            maximum_file_size: 50009000,
-            file_types_allowed: ['image/jpeg', 'image/png', 'image/vnd.adobe.photoshop'],
-            on_error: function(err) {
-                swal({
-                    title: "Upload Failed",
-                    text: err.messages,
-                    type: "warning"
-                })
-            }
-        })
-
+        var index = "<?php echo $index; ?>";
         if (index != '') {
             datagrid.formLoad('#form-action', index);
             uploader.set_files(datagrid.getRowData(index).images)

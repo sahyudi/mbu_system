@@ -19,11 +19,11 @@ class Project_m extends CI_Model
 
     public function getJson($input)
     {
-        $table  = 'products as a';
+        $table  = 'tbl_proyek as a';
         $select = 'a.*';
 
         $replace_field  = [
-            ['old_name' => 'product_name', 'new_name' => 'a.product_name']
+            ['old_name' => 'nama', 'new_name' => 'a.nama']
         ];
 
         $param = [

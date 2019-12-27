@@ -22,9 +22,7 @@ class Project extends Base_Controller
 
     public function index()
     {
-        $this->load->model('Project_m', 'project');
         $this->data['title'] = 'Project';
-        $this->data['project'] = $this->project->getProject()->result_array();
         $this->data['subview'] = 'project/main';
         $this->load->view('components/main', $this->data);
     }
@@ -39,12 +37,10 @@ class Project extends Base_Controller
 
     public function form()
     {
-        // $data['index'] = $this->input->post('index');
-        $this->load->model('Material_m', 'material');
-        $this->load->model('Project_m', 'project');
-        $data['mesin'] = $this->project->getMesin()->result_array();
-        $data['ruangan'] = $this->project->getRuangan()->result_array();
-        $data['material'] = $this->material->getMaterial()->result_array();
+        $data['index'] = $this->input->post('index');
+        $data['mesin'] = $this->db->get('tbl_mesin')->result_array();
+        $data['ruangan'] = $this->db->get('tbl_ruangan')->result_array();
+        $data['material'] = $this->db->get('tbl_material')->result_array();
         $this->load->view('project/form', $data);
     }
 
@@ -59,8 +55,8 @@ class Project extends Base_Controller
     public function data()
     {
         header('Content-Type: application/json');
-        $this->load->model('product_m');
-        echo json_encode($this->product_m->getJson($this->input->post()));
+        $this->load->model('project_m');
+        echo json_encode($this->project_m->getJson($this->input->post()));
     }
 
     /**
