@@ -69,28 +69,28 @@ class Pengadaan extends Base_Controller
     {
         $rules = [
             [
-                'field' => 'product_name',
-                'label' => 'Product Name',
+                'field' => 'vendor_id',
+                'label' => 'Vendor',
                 'rules' => 'required'
             ],
             [
-                'field' => 'price',
-                'label' => 'Price',
+                'field' => 'no_pembelian',
+                'label' => 'No Surat',
                 'rules' => 'required'
             ],
             [
-                'field' => 'stock',
-                'label' => 'Stock',
+                'field' => 'material_id',
+                'label' => 'Material',
                 'rules' => 'required'
             ],
             [
-                'field' => 'images',
-                'label' => 'Images',
+                'field' => 'tgl_beli',
+                'label' => 'Tanggal',
                 'rules' => 'required'
             ],
             [
-                'field' => 'description',
-                'label' => 'Description',
+                'field' => 'qty',
+                'label' => 'Quantity',
                 'rules' => 'required'
             ]
         ];
@@ -132,11 +132,13 @@ class Pengadaan extends Base_Controller
 
     public function create()
     {
-        $data['product_name']     = $this->input->post('product_name');
-        $data['price']           = $this->input->post('price');
-        $data['stock']           = $this->input->post('stock');
-        $data['images']           = $this->input->post('images');
-        $data['description']       = $this->input->post('description');
+        $data = [
+            'no_pembelian' => $this->input->post('no_pembelian'),
+            'vendor_id' => $this->input->post('vendor_id'),
+            'qty' => $this->input->post('qty'),
+            'tgl_beli' => $this->input->post('tgl_beli'),
+            'material_id' => $this->input->post('material_id')
+        ];
         $this->db->insert('tbl_pasok', $data);
 
         header('Content-Type: application/json');
@@ -153,11 +155,13 @@ class Pengadaan extends Base_Controller
 
     public function update()
     {
-        $data['product_name']     = $this->input->post('product_name');
-        $data['price']           = $this->input->post('price');
-        $data['stock']           = $this->input->post('stock');
-        $data['images']           = $this->input->post('images');
-        $data['description']       = $this->input->post('description');
+        $data = [
+            'no_pembelian' => $this->input->post('no_pembelian'),
+            'vendor_id' => $this->input->post('vendor_id'),
+            'qty' => $this->input->post('qty'),
+            'tgl_beli' => $this->input->post('tgl_beli'),
+            'material_id' => $this->input->post('material_id')
+        ];
         $this->db->where('id', $this->input->post('id'));
         $this->db->update('tbl_pasok', $data);
 
@@ -177,148 +181,5 @@ class Pengadaan extends Base_Controller
     {
         $this->db->where('id', $this->input->post('id'));
         $this->db->delete('tbl_pasok');
-    }
-
-    function getProject($id = null)
-    {
-        $this->db->select('*');
-        if ($id) {
-            $this->db->where('id', $id);
-        }
-        return $this->db->get('tbl_proyek');
-    }
-
-    function getMaterial($no_proyek = null)
-    {
-        $this->db->select('A.*, B.nama');
-        $this->db->join('tbl_material B', 'A.material_id = B.id');
-        $this->db->where('A.proyek_no', $no_proyek);
-        return $this->db->get('tbl_proyek_material A');
-    }
-
-    function getMesinProyek($no_proyek = null)
-    {
-        $this->db->select('A.*, B.nama');
-        $this->db->join('tbl_mesin B', 'A.mesin_id = B.id');
-        $this->db->where('A.proyek_no', $no_proyek);
-        return $this->db->get('tbl_proyek_mesin A');
-    }
-
-    function getRuanganProyek($no_proyek = null)
-    {
-        $this->db->select('A.*, B.nama');
-        $this->db->join('tbl_ruangan B', 'A.ruangan_id = B.id');
-        $this->db->where('A.proyek_no', $no_proyek);
-        return $this->db->get('tbl_proyek_ruangan A');
-    }
-
-    function saveProject()
-    {
-        $data_ruangan = [];
-        $data_mesin = [];
-        $data_material = [];
-
-        $dateTime = date('Y-m-d H:i:s');
-
-        $ruangan = $this->input->post('ruangan');
-        $mesin = $this->input->post('mesin');
-        $item = $this->input->post('item');
-        $qty = $this->input->post('qty');
-        $no_proyek = $this->input->post('proyek_no');
-
-        $data = [
-            'proyek_no' => $no_proyek,
-            'nama' => $this->input->post('nama'),
-            'deskripsi' => $this->input->post('deskripsi'),
-            'tgl_mulai' => $this->input->post('tgl_mulai'),
-            'tgl_selesai' => $this->input->post('tgl_selesai'),
-            'tgl_selesai' => $this->input->post('tgl_selesai'),
-            'tgl_input' => $dateTime
-        ];
-
-        for ($i = 0; $i < count($ruangan); $i++) {
-            $data_ruangan[] = [
-                'proyek_no' => $no_proyek,
-                'ruangan_id' => $ruangan[$i],
-                'deskripsi' => $this->input->post('deskripsi')
-            ];
-        }
-
-        for ($j = 0; $j < count($mesin); $j++) {
-            $data_mesin[] = [
-                'proyek_no' => $no_proyek,
-                'mesin_id' => $mesin[$j]
-            ];
-        }
-
-        for ($k = 0; $k < count($item); $k++) {
-            $data_material[] = [
-                'proyek_no' => $no_proyek,
-                'material_id' => $item[$k],
-                'qty' => $qty[$k],
-                'tgl_input' => $dateTime
-            ];
-        }
-
-
-        $this->db->trans_begin();
-
-        $this->db->insert_batch('tbl_proyek_ruangan', $data_ruangan);
-        $this->db->insert_batch('tbl_proyek_mesin', $data_mesin);
-        $this->db->insert_batch('tbl_proyek_material', $data_material);
-        $this->db->insert('tbl_proyek', $data);
-
-        if ($this->db->trans_status() === FALSE) {
-            $this->db->trans_rollback();
-            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Project gagal ditambahkan! </div>');
-        } else {
-            $this->db->trans_commit();
-            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Project berhasil ditambahkan! </div>');
-        }
-    }
-
-
-    function getMesin($id = null)
-    {
-        $this->db->select('*');
-        if ($id) {
-            $this->db->where('id', $id);
-        }
-        return $this->db->get('tbl_mesin');
-    }
-
-    function saveMesin($id = null)
-    {
-        $data = [
-            'nama' => $this->input->post('nama'),
-            'deskripsi' => $this->input->post('deskripsi')
-        ];
-        if ($id) {
-            $this->db->update('tbl_mesin', $data, ['id' => $id]);
-        } else {
-            $this->db->insert('tbl_mesin', $data);
-        }
-    }
-
-    function getRuangan($id = null)
-    {
-        $this->db->select('*');
-        if ($id) {
-            $this->db->where('id', $id);
-        }
-        return $this->db->get('tbl_ruangan');
-    }
-
-    function saveRuangan($id = null)
-    {
-        $data = [
-            'nama' => $this->input->post('nama'),
-            'deskripsi' => $this->input->post('deskripsi')
-        ];
-        if ($id) {
-            $this->db->update('tbl_ruangan', $data, ['id' => $id]);
-        } else {
-            $this->db->insert('tbl_ruangan', $data);
-        }
     }
 }

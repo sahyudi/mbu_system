@@ -24,7 +24,7 @@
                             <select name="vendor_id" id="vendor_id" class="form-control select2">
                                 <option value=""></option>
                                 <?php foreach ($vendor as $key => $v) { ?>
-                                    <option value="<?= $v->id ?>"><?= $v->kode." - ".$v->nama ?></option>
+                                    <option value="<?= $v->id ?>"><?= $v->kode . " - " . $v->nama ?></option>
                                 <?php } ?>
                             </select>
                             <div class="validation-message" data-field="vendor_id"></div>
@@ -34,7 +34,7 @@
                             <select name="material_id" id="material_id" class="form-control select2">
                                 <option value=""></option>
                                 <?php foreach ($material as $key => $m) { ?>
-                                    <option value="<?= $m->id ?>"><?= $m->kode." - ".$m->nama ?></option>
+                                    <option value="<?= $m->id ?>"><?= $m->kode . " - " . $m->nama ?></option>
                                 <?php } ?>
                             </select>
                             <div class="validation-message" data-field="material_id"></div>
@@ -44,14 +44,14 @@
                             <input id="tgl_beli" type="date" class="form-control" name="tgl_beli" value="<?= set_value('tgl_beli'); ?>" required autofocus>
                             <div class="validation-message" data-field="tgl_beli"></div>
                         </div>
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <label for="email">Harga / Unit</label>
                             <input name="harga_" id="harga_" class="form-control" type="number">
                             <div class="validation-message" data-field="harga_"></div>
-                        </div>
+                        </div> -->
                         <div class="form-group">
                             <label for="email">Quantity</label>
-                            <input name="qty" id="qty" class="form-control" type="number">
+                            <input name="qty" id="qty" class="form-control" type="text" readonly>
                             <div class="validation-message" data-field="qty"></div>
                         </div>
                     </form>
@@ -69,26 +69,8 @@
 <script type="text/javascript">
     var onLoad = (function() {
         var index = "<?php echo $index; ?>";
-
-        var uploader = $('.picker-uploader').uploader({
-            upload_url: '<?php echo base_url() . 'uploader/upload'; ?>',
-            file_picker_url: '<?php echo base_url() . 'uploader/files'; ?>',
-            input_name: 'images',
-            maximum_total_files: 4,
-            maximum_file_size: 50009000,
-            file_types_allowed: ['image/jpeg', 'image/png', 'image/vnd.adobe.photoshop'],
-            on_error: function(err) {
-                swal({
-                    title: "Upload Failed",
-                    text: err.messages,
-                    type: "warning"
-                })
-            }
-        })
-
         if (index != '') {
             datagrid.formLoad('#form-action', index);
-            uploader.set_files(datagrid.getRowData(index).images)
         }
 
         $('.loading-panel').hide();
@@ -100,7 +82,7 @@
         $('#form-action').disable([".action"]);
         $("button[title='save']").html("Validating data, please wait...");
         $.ajax({
-            url: "<?php echo base_url() . 'product/validate'; ?>",
+            url: "<?php echo base_url() . 'pengadaan/validate'; ?>",
             async: false,
             type: 'POST',
             data: formData,
@@ -129,7 +111,7 @@
 
     function save(formData) {
         $("button[title='save']").html("Saving data, please wait...");
-        $.post("<?php echo base_url() . 'product/action'; ?>", formData).done(function(data) {
+        $.post("<?php echo base_url() . 'pengadaan/action'; ?>", formData).done(function(data) {
             $('.datagrid-panel').fadeIn();
             $('.form-panel').fadeOut();
             datagrid.reload();

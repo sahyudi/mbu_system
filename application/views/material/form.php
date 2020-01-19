@@ -26,7 +26,7 @@
                         </div>
                         <div class="form-group">
                             <label for="email">Jumlah</label>
-                            <input id="jumlah" type="text" class="form-control" name="jumlah">
+                            <input id="jumlah" type="text" class="form-control" name="jumlah" value="0" readonly>
                             <div class="validation-message" data-field="jumlah"></div>
                         </div>
                         <div class="form-group">
