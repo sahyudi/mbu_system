@@ -190,12 +190,12 @@ class Project extends Base_Controller
         return $this->db->get('tbl_proyek');
     }
 
-    function getMaterial($no_proyek = null)
+    function getMaterial($id = null)
     {
-        $this->db->select('A.*, B.nama');
-        $this->db->join('tbl_material B', 'A.material_id = B.id');
-        $this->db->where('A.proyek_no', $no_proyek);
-        return $this->db->get('tbl_proyek_material A');
+        $this->db->select('A.*');
+        $this->db->where('A.id', $id);
+        $data = $this->db->get('tbl_material A')->row();
+        echo json_encode($data);
     }
 
     function getMesinProyek($no_proyek = null)
