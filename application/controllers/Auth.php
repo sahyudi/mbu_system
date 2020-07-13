@@ -1,16 +1,17 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Auth extends CI_Controller {
+class Auth extends CI_Controller
+{
 
 	/**
-     * Login Form
-     *
-     * @access 	public
-     * @param 	
-     * @return 	view
-     */
-	
+	 * Login Form
+	 *
+	 * @access 	public
+	 * @param 	
+	 * @return 	view
+	 */
+
 	public function login()
 	{
 		$data['title'] = 'Login';
@@ -19,12 +20,12 @@ class Auth extends CI_Controller {
 	}
 
 	/**
-     * Validate and Login User
-     *
-     * @access 	public
-     * @param 	
-     * @return 	json(array)
-     */
+	 * Validate and Login User
+	 *
+	 * @access 	public
+	 * @param 	
+	 * @return 	json(array)
+	 */
 
 	public function login_attempt()
 	{
@@ -60,14 +61,15 @@ class Auth extends CI_Controller {
 	}
 
 	/**
-     * Logout User
-     *
-     * @access 	public
-     * @param 	
-     * @return 	redirect
-     */
+	 * Logout User
+	 *
+	 * @access 	public
+	 * @param 	
+	 * @return 	redirect
+	 */
 
-	public function logout() {
+	public function logout()
+	{
 		$this->session->unset_userdata('active_user');
 		redirect('auth/login');
 	}
